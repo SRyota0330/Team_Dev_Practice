@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "User")
+@Table(name = "USERS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,10 +27,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long userid;
 
     @Column(nullable = false, unique = true)
-    private String mailAddress;
+    private String mailaddress;
 
     @Column(nullable = false)
     private String address;
