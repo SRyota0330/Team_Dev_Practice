@@ -21,27 +21,27 @@ public class AuthController {
 	UserService userService;
 	
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login(Model model, User user) {
 	    // もしログイン時にユーザー情報を表示する必要がなければ削除可能
 	    // List<User> allUser = userService.getAllUser();
-		model.addAttribute("user", new User());
-	    return "login";  // login.htmlに遷移
+//		model.addAttribute("user", new User());
+	    return "user/login";  // login.htmlに遷移
 	}
 
-	@PostMapping("/top")
+	@PostMapping("/index")
 	public String submitForm(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
-	        return "login";  // エラーがあればフォームに戻る
+	        return "/";  // エラーがあればフォームに戻る
 	    }
 
 	    // userVerifyメソッドを使って認証
-	    User verifiedUser = userService.userVerify(user.getMailAddress(), user.getPassword());
+	    User verifiedUser = userService.userVerify(user.getMailaddress(), user.getPassword());
 	    if (verifiedUser != null) {
 	        model.addAttribute("user", verifiedUser);
-	        return "top";  // 認証成功後、トップページへ遷移
+	        return "user/logged";  // 認証成功後、トップページへ遷移
 	    } else {
 	        model.addAttribute("error", "再度入力してください");
-	        return "login";  // 認証失敗時に再度ログインページ
+	        return "user/login";  // 認証失敗時に再度ログインページ
 	    }
 	}
 
@@ -56,7 +56,7 @@ public class AuthController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 	    session.invalidate();  // セッションを無効化
-	    return "redirect:/login";  // ログアウト後にログインページへ遷移
+	    return "redirect:user/login";  // ログアウト後にログインページへ遷移
 	}
 
 	
