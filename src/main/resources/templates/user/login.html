@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>ログイン</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+		
+	<body>
+		<div class="container">
+		    <h1>Shinano</h1>
+		    <h2>ログイン</h2>
+			<form action="#" th:action="@{/index}" th:object="${user}" method="post">
+			    <input type="email" th:field="*{mailaddress}" placeholder="メールアドレス">
+			    <input type="password" th:field="*{password}" placeholder="パスワード">
+			    <input type="submit" value="ログイン" />
+			</form>
+		    <p><a href="register.html">新規会員登録</a></p>
+		</div>
+	</body>
+</html>
