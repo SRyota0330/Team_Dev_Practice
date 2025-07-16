@@ -1,16 +1,20 @@
 body {
   font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-  background-color: #f8f4ec;
+  background-color: #f9f6f1;
   margin: 0;
   padding: 0;
   color: #333;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 50px auto;
   padding: 20px;
-  margin-left:250px;
+  margin-left: 250px;
+}
+
+h2 {
+  margin-bottom: 20px;
 }
 
 .sidebar {
@@ -31,45 +35,35 @@ body {
   align-items: center;  /* 横中央 */
 }
 
-
  
 .logo {
   margin-top: 10px;       /* 必要に応じて上下の余白 */
   margin-bottom: 20px;
 }
 
- 
-input[type="text"] {
-  width: 60%;
-  padding: 10px;
-  margin-bottom: 20px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
 
 .card {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 10px;
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+  padding: 12px;
   background-color: white;
-  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
 }
 
 .card img {
-  max-width: 80px;
-  margin-right: 20px;
+  max-width: 100px;
+  margin-bottom: 10px;
 }
 
-.button {
-  background-color: #5b4425;
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
+.card h3 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
 }
