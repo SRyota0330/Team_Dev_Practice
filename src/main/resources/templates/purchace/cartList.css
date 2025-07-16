@@ -1,0 +1,67 @@
+body {
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background-color: #f8f4ec;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  margin-left:200px;
+}
+.sidebar {
+  width: 200px;
+  background-color: #6e655a;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  border-right: 1px solid #333;
+  height:100vh;
+  position:fixed;
+  top:0;
+  left:0;
+}
+ 
+.logo {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+ 
+input[type="text"] {
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.card img {
+  max-width: 80px;
+  margin-right: 20px;
+}
+
+.button {
+  background-color: #5b4425;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
