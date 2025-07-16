@@ -1,0 +1,1 @@
+--INSERT INTO USERS (userId, mailAddress, address, name, password) VALUES (99,'test@mail', 'nippon', 'testuser', 'testpass');
