@@ -12,13 +12,17 @@ import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "User")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -30,6 +34,9 @@ public class User {
 
     @Column(nullable = false)
     private String address;
+    
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false)
     private String password;
