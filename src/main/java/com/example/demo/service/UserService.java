@@ -33,8 +33,9 @@ public class UserService {
 //	public User getUserDetail() {
 //		return userDetail;
 //	}
-//	
+	
 	public User userVerify(String mail, String password) {
+		System.out.println("サービス");
 	    return userRepository.userVerify(mail, password);
 	}
 
