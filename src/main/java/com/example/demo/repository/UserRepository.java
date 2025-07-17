@@ -60,6 +60,7 @@ public class UserRepository{
 	
 	
 	public User userVerify(String mail, String password) {
+		System.out.println("リポジトリあたま");
 	    String query = "SELECT * FROM users WHERE mailaddress = ?";
 //	    mail="test@mail";
 	    List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, mail);
