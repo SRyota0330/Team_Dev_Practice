@@ -21,17 +21,17 @@ public class UserRepository{
 	}
 	
 	public void addUser(User user) {
-	    String query = "INSERT INTO USERS (NAME, MAIL, ADDRESS, PASSWORD) VALUES (?, ?, ?, ?)";
+	    String query = "INSERT INTO users (name, mailaddress, address, password) VALUES (?, ?, ?, ?)";
 	    jdbcTemplate.update(query, user.getName(), user.getMailaddress(), user.getAddress(), user.getPassword());
 	}
 	
-	public void dellUser(int userId) {
-	    String query = "DELETE FROM USERS WHERE ID = ?";
-	    jdbcTemplate.update(query, userId);
+	public void dellUser(int userid) {
+	    String query = "DELETE FROM users WHERE id = ?";
+	    jdbcTemplate.update(query, userid);
 	}
 	
 	public void editUser(User user) {
-	    String query = "UPDATE USERS SET NAME = ?, MAIL = ?, ADDRESS = ?, PASSWORD = ? WHERE ID = ?";
+	    String query = "UPDATE users SET name = ?, mail = ?, address = ?, password = ? WHERE id = ?";
 	    jdbcTemplate.update(query, user.getName(), user.getMailaddress(), user.getAddress(), user.getPassword(), user.getUserid());
 	}
 
@@ -40,45 +40,24 @@ public class UserRepository{
 	public List<User> getAllUser(){
 		List<User> allUserList = new ArrayList<User>();
 		
-		String query = "SELECT * FROM USERS";
+		String query = "SELECT * FROM users";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query);
 		
 		for(Map<String,Object> resultMap : searchResultList) {
 			User user = new User();
 			
-			user.setName((String)resultMap.get("NAME"));
-			user.setUserid((Long)resultMap.get("ID"));
-			user.setMailaddress((String)resultMap.get("MAIL"));
-			user.setAddress((String)resultMap.get("ADDRESS"));
-			user.setPassword((String)resultMap.get("PASSWORD"));
+			user.setName((String)resultMap.get("name"));
+			user.setUserid((Long)resultMap.get("id"));
+			user.setMailaddress((String)resultMap.get("mail"));
+			user.setAddress((String)resultMap.get("address"));
+			user.setPassword((String)resultMap.get("password"));
 			
 			allUserList.add(user);
 		}
 		return allUserList;
 	}
 	
-//	public User userVerify(String mail, String password) {
-//	    User loginUser = new User();
-//
-//	    // パラメータを使ったSQLクエリに修正
-//	    String query = "SELECT * FROM USERS WHERE MAIL = ? AND PASSWORD = ?";
-//
-//	    // パラメータを安全に設定
-//	    List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, mail, password);
-//
-//	    // ユーザーが見つかった場合、Userオブジェクトを作成
-//	    if (!resultList.isEmpty()) {
-//	        Map<String, Object> resultMap = resultList.get(0);  // 最初の結果を取り出す
-//	        loginUser.setName((String) resultMap.get("NAME"));
-//	        loginUser.setId((int) resultMap.get("ID"));
-//	        loginUser.setMail((String) resultMap.get("MAIL"));
-//	        loginUser.setAddress((String) resultMap.get("ADDRESS"));
-//	        loginUser.setPassword((String) resultMap.get("PASSWORD"));
-//	    }
-//
-//	    return loginUser;
-//	}
 	
 	public User userVerify(String mail, String password) {
 	    String query = "SELECT * FROM users WHERE mailaddress = ?";
