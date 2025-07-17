@@ -15,7 +15,7 @@ public class UserService {
 	UserRepository userRepository;
 	
 	public void addUser(User user) {
-		
+		userRepository.addUser(user);
 	}
 	
 	public void dellUser(User user) {
@@ -27,7 +27,6 @@ public class UserService {
 	}
 	
 	public List<User> getAllUser() {
-		
 		return userRepository.getAllUser();
 	}
 	
