@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Item")
+@Table(name = "item")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +23,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemId;
+    private Long itemid;
 
     @Column(nullable = false)
     private String name;
@@ -32,7 +32,7 @@ public class Item {
     private Integer price;
 
     @Column
-    private String pictureLink;
+    private String picturelink;
 
     @Column(length = 1000)
     private String detail;
