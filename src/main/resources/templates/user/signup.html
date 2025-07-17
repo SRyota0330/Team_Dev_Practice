@@ -10,11 +10,14 @@
 	<div class="container">
 		<h1>Shinano</h1>
 		<h2>登録フォーム</h2>
-			<input type="text" placeholder="ユーザー名">
-			<input type="email" placeholder="メールアドレス">
-			<input type="password" placeholder="パスワード">
-			<input type="text" placeholder="住所">
-			<button class="button">登録</button>
+		<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+			<input type="text" th:field="*{name}" placeholder="名前">
+			<input type="email" th:field="*{mailaddress}" placeholder="メールアドレス">
+			<input type="text" th:field="*{address}" placeholder="住所">
+			<input type="password" th:field="*{password}" placeholder="パスワード">
+			<input type="submit" class="button" value="新規会員登録" />
+			<p><a href="/login">ログインページへ戻る</a></p>
+		</form>
 	</div>
 </body>
 </html>
