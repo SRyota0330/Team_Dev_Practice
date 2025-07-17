@@ -14,15 +14,15 @@ public class ItemService {
 	ItemRepository itemRepository;
 	
 	public void addItem(Item item) {
-		
+		itemRepository.addItem(item);
 	}
 	
 	public void dellItem(Item item) {
-		
+		itemRepository.dellItem(item.getItemid());
 	}
 	
-	public void editItem() {
-		
+	public void editItem(Item item) {
+		itemRepository.editItem(item);
 	}
 	
 	public List<Item> getAllItem() {
@@ -30,7 +30,8 @@ public class ItemService {
 		return itemRepository.getAllItem();
 	}
 	
-	public void getItemDetail() {
+	public Item getItemDetail(Item item) {
+		return itemRepository.getOneItemFromId(item.getItemid());
 	}
 	
 
