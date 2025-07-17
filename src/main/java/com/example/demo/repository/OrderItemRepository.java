@@ -23,17 +23,17 @@ public class OrderItemRepository {
 	}
 	
 	public void addItemToCart(Order order, Item item) {
-		String query = "INSERT INTO ITEMS (ORDER_ID, ITEM_ID, QUANTITY) VALUES (?, ?, ?)";
+		String query = "INSERT INTO orderitem (order_id, item_id, quantity) VALUES (?, ?, ?)";
 		jdbcTemplate.update(query, order.getOrderid(), item.getItemid());
 	}
 	
-	public void delItemFromCart(int orderId, int itemId) {
-		String query = "DELETE FROM ITEMS (ORDER_ID, ITEM_ID) VALUES (?, ?)";
-		jdbcTemplate.update(query, orderId, itemId);
+	public void delItemFromCart(Order order, Item item) {
+		String query = "DELETE FROM orderitem (order_id, item_id) VALUES (?, ?)";
+		jdbcTemplate.update(query, order, item);
 	}
 	
 	public void editItemOnCart(int quantity) {
-		String query = "UPDATE ORDERITEM SET QUANTITY = ?";
+		String query = "UPDATE orderitem SET quantity = ?";
 		jdbcTemplate.update(query);
 	}
 	

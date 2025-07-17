@@ -20,8 +20,8 @@ public class CartService {
 		orderItemRepository.addItemToCart(order, item);
 	}
 	
-	public void delItemFromCart(int orderId, int itemId) {
-		orderItemRepository.delItemFromCart(orderId, itemId);
+	public void delItemFromCart(Order order, Item item) {
+		orderItemRepository.delItemFromCart(order, item);
 	}
 	
 	public void editItemOnCart(int quantity) {
