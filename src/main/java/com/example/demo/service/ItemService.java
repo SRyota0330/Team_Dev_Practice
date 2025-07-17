@@ -23,6 +23,7 @@ public class ItemService {
 	
 	public void editItem(Item item) {
 		itemRepository.editItem(item);
+
 	}
 	
 	public List<Item> getAllItem() {
