@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.entity.User;
+import com.example.demo.service.ItemService;
 import com.example.demo.service.UserService;
 
 @Controller
@@ -20,40 +21,45 @@ public class AuthController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+    private ItemService itemService;
 	
-	//top.htmlに繊維
-	@GetMapping("/top")
-	public String top(Model model){
-		return "/top";
-	}
 	
-	//login.html
+	//login.htmlへ遷移
 	@GetMapping("/login")
 	public String login(Model model, User user) {
 	    return "user/login";  // login.htmlに遷移
 	}
 	
-	// ログイン処理とセッション管理を一貫して行うメソッド
-	@PostMapping("/top")
+	// ログイン処理とセッション管理
+	@PostMapping("/logged")
 	public String submitForm(@ModelAttribute("user") @Valid User user, BindingResult result, HttpSession session, Model model) {
 	    if (result.hasErrors()) {
-	        return "user/login";  // バリデーションエラーがあればログインページに戻る
+	        return "user/login"; 
 	    }
 
 	    // userVerifyメソッドでユーザー認証
 	    User verifiedUser = userService.userVerify(user.getMailaddress(), user.getPassword());
 	    if (verifiedUser != null) {
 	        // 認証成功した場合、セッションにユーザー情報を保存
-	        session.setAttribute("userid", verifiedUser.getMailaddress());
+	        session.setAttribute("userid", verifiedUser.getUserid());
+	        
+		    // セッションから 'userid' を取得
+		    Long userid = (Long) session.getAttribute("userid");
 
-	        // 認証後、トップページに遷移
-	        model.addAttribute("user", verifiedUser);
-	        return "top";  // 認証成功後、トップページに遷移
-	    } else {
-	        // 認証失敗した場合、エラーメッセージを表示して再度ログインページへ
-	        model.addAttribute("error", "再度入力してください");
-	        return "user/login";
-	    }
+
+		    // セッションに 'userid' が存在するか確認
+	        model.addAttribute("mail", "セッション情報⇒" + userid);
+	        System.out.println("ユーザーのメールアドレス: " + userid);
+	        model.addAttribute("you", verifiedUser);
+	        return "user/logged";
+	        
+		 }else {
+		    model.addAttribute("mail", "ログインしていません");
+	        System.out.println("ユーザーはログインしていません");
+	        return "redirect:/login";
+		 }
+
 	}
 
 
@@ -74,26 +80,18 @@ public class AuthController {
 	}
 	
 	
-	@GetMapping("/top-session")
-    public String top(HttpSession session) {
-        // セッションからメールアドレスを取得
-        String mailaddress = (String) session.getAttribute("mailaddress");
 
-        if (mailaddress == null) {
-            return "redirect:/login"; // ユーザーがログインしていなければ、ログインページにリダイレクト
-        }
-
-        // ログインしていれば、ホームページを表示
-        return "top";
-    }
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 	    session.invalidate();  // セッションを無効化
 	    return "redirect:user/login";  // ログアウト後にログインページへ遷移
 	}
+	
+
 
 	
-//	ログアウトボタンが押されたらトップページへ遷移
+	
+	
 
 }
