@@ -26,7 +26,7 @@ public class ItemRepository {
 	}
 	
 	public void editItem(Item item) {
-	    String query = "UPDATE item SET name = ?, price = ?, picturelink = ?, detail = ?,genre = ?  WHERE ID = ?";
+	    String query = "UPDATE item SET name = ?, price = ?, picturelink = ?, detail = ?,genre = ?  WHERE itemid = ?";
 	    jdbcTemplate.update(query, item.getName(), item.getPrice(), item.getPicturelink(), item.getDetail(), item.getGenre(), item.getItemid());
 	}
 
