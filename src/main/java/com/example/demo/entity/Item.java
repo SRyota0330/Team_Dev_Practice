@@ -36,6 +36,9 @@ public class Item {
 
     @Column(length = 1000)
     private String detail;
+    
+    @Column(nullable = false)
+    private String genre;
 
     @OneToOne(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Stock stock;

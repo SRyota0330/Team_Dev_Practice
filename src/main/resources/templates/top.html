@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 	
 <head>
 	<meta charset="UTF-8">
 	<title>Shinano</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="top.css">
 </head>
 
 <body>
@@ -34,10 +34,10 @@
 				</div>
 			</header>
 			<section class="product-list">
-				<div class="product-card">
-					<img src="torys.png" alt="お酒の写真" class="product-image">
-					<p>お酒の名前</p>
-					<p>価格</p>
+				<div class="product-card" th:each="item :${items}">
+					<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image">
+					<p th:text="${item.name}">商品名</p>
+					<p th:text="${item.price} + '円'">価格</p>
 				</div>
 				<div class="product-card"></div>
 				<div class="product-card"></div>
