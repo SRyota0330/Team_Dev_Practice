@@ -26,6 +26,10 @@ public class UserService {
 		
 	}
 	
+	public User getOneUser(Long id) {
+		return userRepository.getOneUser(id);
+	}
+	
 	public List<User> getAllUser() {
 		return userRepository.getAllUser();
 	}

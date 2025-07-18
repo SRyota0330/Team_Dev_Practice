@@ -34,8 +34,23 @@ public class UserRepository{
 	    String query = "UPDATE users SET name = ?, mail = ?, address = ?, password = ? WHERE id = ?";
 	    jdbcTemplate.update(query, user.getName(), user.getMailaddress(), user.getAddress(), user.getPassword(), user.getUserid());
 	}
-
-
+	
+	public User getOneUser(Long id) {
+		String query = "SELECT * FROM users WHERE userid = ? LIMIT 1";
+		
+		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query, id);
+		Map<String, Object> resultMap = searchResultList.get(0);
+		System.out.println(resultMap+"UserRepositoryのgetOneUser");
+		
+		User loginUser = new User();
+        loginUser.setName((String) resultMap.get("name"));
+        loginUser.setUserid((Long) resultMap.get("userid"));
+        loginUser.setMailaddress((String) resultMap.get("mailaddress"));
+        loginUser.setAddress((String) resultMap.get("address"));
+        loginUser.setPassword((String)resultMap.get("password"));
+        return loginUser;  
+		
+	}
 	
 	public List<User> getAllUser(){
 		List<User> allUserList = new ArrayList<User>();

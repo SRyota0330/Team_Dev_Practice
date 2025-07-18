@@ -8,6 +8,7 @@
 </head>
 
 <body>
+	<h2 th:text="${you}">ここに表示</h2>
 	<div class="container">
 		<aside class="sidebar">
 			<img src="../templates/images/Logo.JPG" alt="ロゴ" width="140px" height="70px">
@@ -34,7 +35,7 @@
 				</div>
 			</header>
 			<section class="product-list">
-				<div class="product-card" th:each="item :${items}">
+				<div class="product-card" th:each="item :${item}">
 					<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image">
 					<p th:text="${item.name}">商品名</p>
 					<p th:text="${item.price} + '円'">価格</p>

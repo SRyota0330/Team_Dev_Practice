@@ -14,22 +14,28 @@
 		</aside>
 
 		<input type="text" placeholder="検索バー">
-
-		<div class="card">
-			<img src="https://via.placeholder.com/80" alt="商品画像">
-			<div>
-				<h3>大吟醸75年</h3>
-				<p>1900円</p>
-			</div>
+		
+		<div class="card" th:each="item :${itemList}">
+			<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image">
+			<p th:text="${item.name}">商品名</p>
+			<p th:text="${item.price} + '円'">価格</p>
 		</div>
 
-		<div class="card">
-			<img src="https://via.placeholder.com/80" alt="商品画像">
-			<div>
-				<h3>角ハイボール62年</h3>
-				<p>800円</p>
-			</div>
-		</div>
+<!--		<div class="card">-->
+<!--			<img src="https://via.placeholder.com/80" alt="商品画像">-->
+<!--			<div>-->
+<!--				<h3>大吟醸75年</h3>-->
+<!--				<p>1900円</p>-->
+<!--			</div>-->
+<!--		</div>-->
+
+<!--		<div class="card">-->
+<!--			<img src="https://via.placeholder.com/80" alt="商品画像">-->
+<!--			<div>-->
+<!--				<h3>角ハイボール62年</h3>-->
+<!--				<p>800円</p>-->
+<!--			</div>-->
+<!--		</div>-->
 
 		<button class="button">レジに進む</button>
 	</div>
