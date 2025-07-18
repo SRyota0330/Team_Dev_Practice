@@ -26,13 +26,15 @@ public class ItemService {
 	}
 	
 	public List<Item> getAllItem() {
-		
 		return itemRepository.getAllItem();
 	}
 	
-	public Item getItemDetail(Item item) {
-		return itemRepository.getOneItemFromId(item.getItemid());
+	public Item getItemDetail(Long id) {
+		return itemRepository.getOneItemFromId(id);
 	}
 	
+	public List<Item> searchItemFromName(String keywords){
+		return itemRepository.searchItemFromName(keywords);
+	}
 
 }
