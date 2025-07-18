@@ -9,8 +9,9 @@
 	<body>
 		<div class="container">
 		    <h1>Shinano</h1>
+			<h2 th:text="${error}">error</h2>
 		    <h2>ログイン</h2>
-			<form action="#" th:action="@{/top}" th:object="${user}" method="post">
+			<form action="#" th:action="@{/logged}" th:object="${user}" method="post">
 			    <input type="email" th:field="*{mailaddress}" placeholder="メールアドレス">
 			    <input type="password" th:field="*{password}" placeholder="パスワード">
 			    <input type="submit" class="button" value="ログイン" />
