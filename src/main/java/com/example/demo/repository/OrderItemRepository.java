@@ -22,6 +22,8 @@ public class OrderItemRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
+	
+	//数量いれる
 	public void addItemToCart(Order order, Item item) {
 		String query = "INSERT INTO orderitem (order_id, item_id, quantity) VALUES (?, ?, ?)";
 		jdbcTemplate.update(query, order.getOrderid(), item.getItemid());
@@ -34,22 +36,22 @@ public class OrderItemRepository {
 	
 	public void editItemOnCart(int quantity) {
 		String query = "UPDATE orderitem SET quantity = ?";
-		jdbcTemplate.update(query);
+		jdbcTemplate.update(query, quantity);
 	}
 	
-	public List<OrderItem> getAllItems(OrderItem orderItem){
+	public List<OrderItem> getAllItems(Long orderId){
 		List<OrderItem>  allItemsList = new ArrayList<OrderItem>();
 		
-		String query = "SELECT * FROM ORDERITEM WHERE order_id = ?";
+		String query = "SELECT * FROM orderitem WHERE order_id = ?";
 		
-		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, orderItem.getOrder());
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, orderId);
 		
 		for(Map<String, Object> searchResultMap : resultList) {
 			OrderItem orderItem1 = new OrderItem();
 			
-			orderItem1.setOrder((Order)searchResultMap.get("ORDER_ID"));
-			orderItem1.setItem((Item)searchResultMap.get("ITEM_ID"));
-			orderItem1.setQuantity((int)searchResultMap.get("QUANTITY"));
+			orderItem1.setOrder((Order)searchResultMap.get("order_id"));
+			orderItem1.setItem((Item)searchResultMap.get("item_id"));
+			orderItem1.setQuantity((int)searchResultMap.get("quantity"));
 			
 			allItemsList.add(orderItem1);
 		}

@@ -9,5 +9,10 @@
 	<h2 th:text="${mail}">ここに表示</h2>
 	<h2 th:text="${you}">ここに表示</h2>
 	<h2>テスト</h2>
+
+
+	<form th:action="@{/logged}" method="post">
+		<button type="submit">logout</button>
+	</form>
 </body>
 </html>

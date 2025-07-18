@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-	
+
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8" />
 	<title>Shinano</title>
-	<link rel="stylesheet" href="top.css">
+	<link rel="stylesheet" href="top.css" />
 </head>
 
 <body>
+	<h2 th:text="${you}">ここに表示</h2>
 	<div class="container">
 		<aside class="sidebar">
-			<img src="../templates/images/Logo.JPG" alt="ロゴ" width="140px" height="70px">
+			<img src="../templates/images/Logo.JPG" alt="ロゴ" class="logo" />
 			<nav class="category">
 				<h3>カテゴリー</h3>
-					<ul>
-						<li>ワイン</li>
-						<li>ビール</li>
-						<li>ウイスキー</li>
-						<li>果実酒</li>
-						<li>日本酒</li>
-					</ul>
+				<ul>
+					<li>ワイン</li>
+					<li>ビール</li>
+					<li>ウイスキー</li>
+					<li>果実酒</li>
+					<li>日本酒</li>
+				</ul>
 			</nav>
 		</aside>
+
 		<main class="main-content">
 			<header class="header">
 				<div class="search-container">
-					<input type="text" placeholder="検索">
+					<input type="text" placeholder="検索" class="search-bar" />
 					<button class="search-button">検索</button>
 				</div>
 				<div class="auth-buttons">
@@ -33,20 +35,16 @@
 					<button class="auth-button">登録</button>
 				</div>
 			</header>
+
 			<section class="product-list">
-				<div class="product-card" th:each="item :${items}">
-					<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image">
+				<div class="product-card" th:each="item : ${items}">
+					<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
 					<p th:text="${item.name}">商品名</p>
-					<p th:text="${item.price} + '円'">価格</p>
+					<p th:text="${item.price + '円'}">価格</p>
 				</div>
-				<div class="product-card"></div>
-				<div class="product-card"></div>
-				<div class="product-card"></div>
-				<div class="product-card"></div>
-				<div class="product-card"></div>
-				<div class="product-card"></div>
 			</section>
 		</main>
 	</div>
 </body>
+
 </html>

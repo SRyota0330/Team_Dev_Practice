@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,17 @@ public class CartService {
 		orderItemRepository.editItemOnCart(quantity);
 	}
 	
-	public List<OrderItem> getAllItems(OrderItem orderItem){
-		return orderItemRepository.getAllItems(orderItem);
+	public List<OrderItem> getAllItems(Long orderId){
+		return orderItemRepository.getAllItems(orderId);
+	}
+	
+	public List<Item> getItemFromOrderItem(List<OrderItem> list){
+		List<Item> resultList = new ArrayList<Item>();
+		for(OrderItem item : list) {
+			resultList.add(item.getItem());
+		}
+		System.out.println(resultList+"getItemFromOrderItem");
+		return resultList;
 	}
 	
 }
