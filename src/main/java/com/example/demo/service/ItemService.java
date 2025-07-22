@@ -26,16 +26,19 @@ public class ItemService {
 	}
 	
 	public List<Item> getAllItem() {
-		
 		return itemRepository.getAllItem();
 	}
 	
-	public Item getItemDetail(Item item) {
-		return itemRepository.getOneItemFromId(item.getItemid());
+	public List<Item> searchItemFromGenre(String genre){
+		return itemRepository.searchItemFromGenre(genre);
 	}
 	
-	public Item getOneItemFromId(Long itemId) {
-		return itemRepository.getOneItemFromId(itemId);
-	}
 
+	public List<Item> searchItemFromName(String keywords){
+		return itemRepository.searchItemFromName(keywords);
+	}
+	
+	public Item itemDetail(Long id) {
+		return itemRepository.itemDetail(id);
+	}
 }

@@ -77,9 +77,10 @@ public class ItemRepository {
 	public List<Item> searchItemFromName(String name){
 		List<Item> allItemList = new ArrayList<Item>();
 		
-		String query = "SELECT * FROM item WHERE name = ?";
+		String query = "SELECT * FROM item WHERE name LIKE ?";
+		String keywords = "%" + name + "%";
 		
-		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,name);
+		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,keywords);
 		
 		for(Map<String,Object> resultMap : searchResultList) {
 			Item item = new Item();
@@ -96,7 +97,7 @@ public class ItemRepository {
 		return allItemList;
 	}
 	
-	public Item getOneItemFromId(Long id){
+	public Item itemDetail(Long id){
 		
 		String query = "SELECT * FROM item WHERE itemid = ? LIMIT 1";
 		
