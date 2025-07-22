@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderItem;
 import com.example.demo.service.CartService;
@@ -36,10 +39,30 @@ public class CartController {
 			Long orderId = orderService.getOrderId(loggedUserOrder);
 			List<OrderItem> orderItem = cartService.getAllItems(orderId);
 			model.addAttribute("itemList", cartService.getItemFromOrderItem(orderItem));
-			return "purchace/cartList";
+			return "purchase/cartList";
 		}else {
 			return "redirect:user/login";
 		}
 	}
+	
+	@PostMapping("/cart/add")
+	public String cartAdd(@RequestParam("itemid") Long itemid,
+						  @RequestParam("quantity") int quantity,
+						  HttpSession session) {
+		Long userid = (Long) session.getAttribute("userid");
+		if (userid != null) {
+			// 1. 注文中のOrderを取得
+			Order order = orderService.getOrderFromUser(userid);
 
+			// 2. 商品情報を取得（サービスがないならリポジトリから直接取得しても可）
+			Item item = new Item();
+			item.setItemid(itemid); 
+
+			// 3. カートに追加
+			cartService.addItemToCart(order, item, quantity);
+			return "redirect:/"; // ホーム画面へリダイレクト
+		}else {
+			return "redirect:/user/login";
+		}
+	}
 }

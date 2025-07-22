@@ -22,9 +22,7 @@ public class OrderItemRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	
-	//数量いれる
-	public void addItemToCart(Order order, Item item) {
+	public void addItemToCart(Order order, Item item, int quantity) {
 		String query = "INSERT INTO orderitem (order_id, item_id, quantity) VALUES (?, ?, ?)";
 		jdbcTemplate.update(query, order.getOrderid(), item.getItemid());
 	}

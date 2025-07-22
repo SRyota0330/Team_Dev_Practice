@@ -17,7 +17,18 @@
 			<h3 th:text="${item.name}">商品名</h3>
 			<p th:text="${item.price}">価格</p>
 			<p th:text="${item.detail}">説明文</p>
-			<button class="button">カートに入れる</button>
+			
+			<form method="post" th:action="@{/cart/add}">
+				<input type="hidden" name="itemid" th:value="${item.itemid}" />
+					<label for="quantity">個数：</label>
+					<select name="quantity" id="quantity">
+						<option th:each="i : ${#numbers.sequence(1,10)}" 
+								th:value="${i}" 
+								th:text="${i}">
+						</option>
+					</select>	
+					<input type="submit" class="button" value="カートに入れる" />
+			</form>	
 	</div>
 </body>
 

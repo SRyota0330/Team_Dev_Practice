@@ -23,7 +23,7 @@ public class OrderRepository {
 	public Order getOrderFromUser(Long userid) {
 		String query = "SELECT * FROM orders WHERE user_id = ?";
 		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, userid);
-		
+	
 		Map<String, Object> resultMap = resultList.get(0);
 		System.out.println(resultMap+"MAP");
 		
