@@ -30,6 +30,7 @@ public class OrderRepository {
 		Order order = new Order();
 		
 		order.setOrderid(((Number) resultMap.get("orderid")).longValue());
+		System.out.println(order.getOrderid());
 		order.setStatus((String)resultMap.get("status"));
 		
 		Object value = resultMap.get("orderitems");
