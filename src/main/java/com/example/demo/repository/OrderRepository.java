@@ -29,9 +29,13 @@ public class OrderRepository {
 		
 		Order order = new Order();
 		
-//		Number number = (Number) resultMap.get("orderid");
-//		order.setOrderid(number.longValue());
+		Number number = (Number) resultMap.get("orderid");
+		order.setOrderid(number.longValue());
 		order.setStatus((String)resultMap.get("status"));
+		
+		Object value = resultMap.get("orderitems");
+		System.out.println("DEBUG: class = " + value.getClass().getName());
+
 		
 		List<OrderItem> orderItemList = orderItemRepository.getAllItems(order.getOrderid());
 		
