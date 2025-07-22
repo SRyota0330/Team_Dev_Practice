@@ -16,14 +16,14 @@ public class ItemRepository {
 	JdbcTemplate jdbcTemplate;
 	
 	public void addItem(Item item) {
-	    String query = "INSERT INTO item (name,price,picturelink,detail,genre) VALUES (?, ?, ?, ?,?)";
+	    String query = "INSERT INTO item (name,price,picturelink,detail,genre) VALUES (?, ?, ?, ?, ?)";
 	    jdbcTemplate.update(query, item.getName(), item.getPrice(), item.getPicturelink(), item.getDetail(),item.getGenre());
 	}
 	
-	public void dellItem(Long itemid) {
-	    String query = "DELETE FROM item WHERE ID = ?";
-	    jdbcTemplate.update(query, itemid);
-	}
+//	public void dellItem(Long itemid) {
+//	    String query = "DELETE FROM item WHERE itemid = ?";
+//	    jdbcTemplate.update(query, itemid);
+//	}
 	
 	public void editItem(Item item) {
 	    String query = "UPDATE item SET name = ?, price = ?, picturelink = ?, detail = ?,genre = ?  WHERE itemid = ?";
@@ -77,7 +77,7 @@ public class ItemRepository {
 	public List<Item> searchItemFromName(String name){
 		List<Item> allItemList = new ArrayList<Item>();
 		
-		String query = "SELECT * FROM item WHERE name LIKE = ?";
+		String query = "SELECT * FROM item WHERE name LIKE ?";
 		String keywords = "%" + name + "%";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,keywords);
@@ -97,7 +97,7 @@ public class ItemRepository {
 		return allItemList;
 	}
 	
-	public Item getOneItemFromId(Long id){
+	public Item itemDetail(Long id){
 		
 		String query = "SELECT * FROM item WHERE itemid = ? LIMIT 1";
 		
