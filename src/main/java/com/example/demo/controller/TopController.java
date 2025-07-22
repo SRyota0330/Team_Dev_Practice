@@ -27,18 +27,24 @@ public class TopController {
 	
 	//検索結果一覧
 	@GetMapping(value="/search")
-	public String search(@RequestParam("keywords") String keywords, Model model) {
-		List<Item> itemList = itemService.searchItemFromName(keywords);
-		model.addAttribute("items", itemList);
-		model.addAttribute("keywords", keywords);
+	public String search(@RequestParam(name = "keywords", required = false) String keywords, Model model) {
+		if(keywords == null || keywords.isBlank()) {
+			List<Item> itemList = itemService.getAllItem();
+			model.addAttribute("items", itemList);
+			model.addAttribute("keywords", " ");
+		}else {
+			List<Item> itemList = itemService.searchItemFromName(keywords);
+			model.addAttribute("items", itemList);
+			model.addAttribute("keywords", keywords);
+		}
 		return "top";
 	}
 	
 	//商品詳細ページへ遷移
 	@GetMapping(value="/item/{id}")
-	public String itemDetail(@PathVariable("id") Long id, Model model) {
-		Item item = itemService.getItemDetail(id);
-		model.addAttribute("itemdetail", item);
-		return "itemDetail";
+	public String detail(@PathVariable("id") Long id, Model model) {
+		Item item = itemService.itemDetail(id);
+		model.addAttribute("item", item);
+		return "purchase/itemDetail";
 	}
 }
