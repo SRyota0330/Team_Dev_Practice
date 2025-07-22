@@ -34,7 +34,7 @@ public class ManageController {
 	    
 	    if (userid == 1) { // 管理者の確認
 	        // 商品IDを使って商品情報を取得
-	        Item item = itemService.getOneItemFromId(itemId);
+	        Item item = itemService.itemDetail(itemId);
 	        model.addAttribute("item", item); // 商品情報をモデルに追加
 	        return "admin/editItems"; // 編集ページに遷移
 	    } else {
