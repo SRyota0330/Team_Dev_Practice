@@ -29,8 +29,7 @@ public class OrderRepository {
 		
 		Order order = new Order();
 		
-		Number number = (Number) resultMap.get("orderid");
-		order.setOrderid(number.longValue());
+		order.setOrderid(((Number) resultMap.get("orderid")).longValue());
 		order.setStatus((String)resultMap.get("status"));
 		
 		Object value = resultMap.get("orderitems");
@@ -39,10 +38,10 @@ public class OrderRepository {
 		
 		List<OrderItem> orderItemList = orderItemRepository.getAllItems(order.getOrderid());
 		
-		System.out.println(order.getStatus()+"OrderRepositoryのgetOrderFromUser");
 		order.setOrderitems(orderItemList);
 		System.out.println(order.getOrderitems()+"OrderRepositoryのgetOrderFromUser");
 		
 		return order;
 	}
+	
 }
