@@ -77,7 +77,7 @@ public class ItemRepository {
 	public List<Item> searchItemFromName(String name){
 		List<Item> allItemList = new ArrayList<Item>();
 		
-		String query = "SELECT * FROM item WHERE name LIKE = ?";
+		String query = "SELECT * FROM item WHERE name LIKE ?";
 		String keywords = "%" + name + "%";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,keywords);
@@ -97,7 +97,7 @@ public class ItemRepository {
 		return allItemList;
 	}
 	
-	public Item getOneItemFromId(Long id){
+	public Item itemDetail(Long id){
 		
 		String query = "SELECT * FROM item WHERE itemid = ? LIMIT 1";
 		

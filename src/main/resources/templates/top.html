@@ -33,7 +33,8 @@
 			<header class="header">
 				<div class="search-container">
 					<form th:action="@{/search}" method="get">
-						<input type="text" th:value="${keywords}"  placeholder="🔍検索" class="search-bar" />
+						<input type="text" name="keywords" th:value="${keywords}"  placeholder="お酒の名前や種類を検索" class="search-bar" />
+						<input type="submit" class="button" value="検索" />
 					</form>	
 				</div>
 				
