@@ -17,9 +17,9 @@ public class ItemService {
 		itemRepository.addItem(item);
 	}
 	
-	public void dellItem(Item item) {
-		itemRepository.dellItem(item.getItemid());
-	}
+//	public void dellItem(Long itemId) {
+//		itemRepository.dellItem(itemId);
+//	}
 	
 	public void editItem(Item item) {
 		itemRepository.editItem(item);
@@ -34,5 +34,8 @@ public class ItemService {
 		return itemRepository.getOneItemFromId(item.getItemid());
 	}
 	
+	public Item getOneItemFromId(Long itemId) {
+		return itemRepository.getOneItemFromId(itemId);
+	}
 
 }

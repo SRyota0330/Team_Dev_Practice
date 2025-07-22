@@ -17,81 +17,134 @@ import com.example.demo.service.UserService;
 
 @Controller
 public class AuthController {
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
-    private ItemService itemService;
-	
-	
+	private ItemService itemService;
+
 	//login.htmlへ遷移
 	@GetMapping("/login")
 	public String login(Model model, User user) {
-	    return "user/login";  // login.htmlに遷移
+		return "user/login"; // login.htmlに遷移
 	}
+
+//	// 20250722 14:00
+//	@RequestMapping("/logged")
+//	public String submitForm(@ModelAttribute("user") @Valid User user, BindingResult result, HttpSession session,
+//			Model model) {
+//
+//
+//		User verifiedUser = userService.getOneUser((Long) session.getAttribute("userid"));
+//		if (result.hasErrors()) {
+//			return "user/login";
+//		}
+//
+//		// userVerifyメソッドでユーザー認証
+//		//	    verifiedUser = userService.userVerify(user.getMailaddress(), user.getPassword());
+//		if (verifiedUser != null) {
+//
+//			// セッションから 'userid' を取得
+//			Long userid = (Long) session.getAttribute("userid");
+//
+//			//管理者か？ユーザーか？
+//			if (userid == 1) {
+//				model.addAttribute("you", verifiedUser);
+//				model.addAttribute("allItem", itemService.getAllItem());
+//				return "admin/manageItemsAndUsers";
+//
+//			} else {
+//				model.addAttribute("userid", "セッション情報⇒" + userid);
+//				System.out.println("ユーザーのメールアドレス: " + userid);
+//				model.addAttribute("you", verifiedUser);
+//				return "user/logged";
+//			}
+//
+//		} else { 
+//				verifiedUser = userService.userVerify(user.getMailaddress(), user.getPassword());
+//				// 認証成功した場合、セッションにユーザー情報を保存
+//				session.setAttribute("userid", verifiedUser.getUserid());
+//
+//				// セッションから 'userid' を取得
+//				Long userid = (Long) session.getAttribute("userid");
+//				if(userid == null) {
+//					model.addAttribute("mail", "ログインしていません");
+//					System.out.println("ユーザーはログインしていません");
+//					return "redirect:/login";
+//				}
+//
+//				//管理者か？ユーザーか？
+//				if (userid == 1) {
+//					model.addAttribute("you", verifiedUser);
+//					model.addAttribute("allItem", itemService.getAllItem());
+//					return "admin/manageItemsAndUsers";
+//
+//				} else {
+//					model.addAttribute("userid", "セッション情報⇒" + userid);
+//					System.out.println("ユーザーのメールアドレス: " + userid);
+//					model.addAttribute("you", verifiedUser);
+//					return "user/logged";
+//				}
+//			}
+//
+//		}
 	
 	// ログイン処理とセッション管理
-	@PostMapping("/logged")
-	public String submitForm(@ModelAttribute("user") @Valid User user, BindingResult result, HttpSession session, Model model) {
-	    if (result.hasErrors()) {
-	        return "user/login"; 
-	    }
+		@PostMapping("/logged")
+		public String submitForm(@ModelAttribute("user") @Valid User user, BindingResult result, HttpSession session, Model model) {
+		    if (result.hasErrors()) {
+		        return "user/login"; 
+		    }
 
-	    // userVerifyメソッドでユーザー認証
-	    User verifiedUser = userService.userVerify(user.getMailaddress(), user.getPassword());
-	    if (verifiedUser != null) {
-	        // 認証成功した場合、セッションにユーザー情報を保存
-	        session.setAttribute("userid", verifiedUser.getUserid());
-	        
-		    // セッションから 'userid' を取得
-		    Long userid = (Long) session.getAttribute("userid");
+		    // userVerifyメソッドでユーザー認証
+		    User verifiedUser = userService.userVerify(user.getMailaddress(), user.getPassword());
+		    if (verifiedUser != null) {
+		        // 認証成功した場合、セッションにユーザー情報を保存
+		        session.setAttribute("userid", verifiedUser.getUserid());
+		        
+			    // セッションから 'userid' を取得
+			    Long userid = (Long) session.getAttribute("userid");
 
 
-		    // セッションに 'userid' が存在するか確認
-	        model.addAttribute("mail", "セッション情報⇒" + userid);
-	        System.out.println("ユーザーのメールアドレス: " + userid);
-	        model.addAttribute("you", verifiedUser);
-	        return "user/logged";
-	        
-		 }else {
-		    model.addAttribute("mail", "ログインしていません");
-	        System.out.println("ユーザーはログインしていません");
-	        return "redirect:/login";
-		 }
+			    if (userid == 1) {
+					model.addAttribute("you", verifiedUser);
+					model.addAttribute("allItem", itemService.getAllItem());
+					return "admin/manageItemsAndUsers";
 
-	}
-
+				} else {
+					model.addAttribute("userid", "セッション情報⇒" + userid);
+					System.out.println("ユーザーのメールアドレス: " + userid);
+					model.addAttribute("you", verifiedUser);
+					return "user/logged";
+				}
+			}else {
+			    model.addAttribute("mail", "ログインしていません");
+		        System.out.println("ユーザーはログインしていません");
+		        return "redirect:/login";
+			 }
+		}
+		
 
 	@PostMapping("/signup")
 	public String register(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
-	    if (result.hasErrors()) {
-	        return "user/signup";  // バリデーションエラーがあればフォームに戻る
-	    }
-	    userService.addUser(user);  // ユーザー登録処理
-	    return "redirect:/login";  // 登録後にログインページにリダイレクト
+		if (result.hasErrors()) {
+			return "user/signup"; // バリデーションエラーがあればフォームに戻る
+		}
+		userService.addUser(user); // ユーザー登録処理
+		return "redirect:/login"; // 登録後にログインページにリダイレクト
 	}
 
-	
 	@GetMapping("/signup")
 	public String signup(Model model, User user) {
-	    model.addAttribute("user", new User());  // 新しいUserオブジェクトをフォームにバインディング
-	    return "user/signup";  // signup.htmlに遷移
+		model.addAttribute("user", new User()); // 新しいUserオブジェクトをフォームにバインディング
+		return "user/signup"; // signup.htmlに遷移
 	}
-	
-	
 
-	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-	    session.invalidate();  // セッションを無効化
-	    return "redirect:user/login";  // ログアウト後にログインページへ遷移
+		session.invalidate(); // セッションを無効化
+		return "redirect:user/login"; // ログアウト後にログインページへ遷移
 	}
-	
-
-
-	
-	
-	
 
 }
