@@ -39,23 +39,75 @@ public class OrderItemRepository {
 		jdbcTemplate.update(query, quantity);
 	}
 	
-	public List<OrderItem> getAllItems(Long orderId){
-		List<OrderItem>  allItemsList = new ArrayList<OrderItem>();
-		
-		String query = "SELECT * FROM orderitem WHERE order_id = ?";
-		
-		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, orderId);
-		
-		for(Map<String, Object> searchResultMap : resultList) {
-			OrderItem orderItem1 = new OrderItem();
-			
-			orderItem1.setOrder((Order)searchResultMap.get("order_id"));
-			orderItem1.setItem((Item)searchResultMap.get("item_id"));
-			orderItem1.setQuantity((int)searchResultMap.get("quantity"));
-			
-			allItemsList.add(orderItem1);
-		}
-		
-		return allItemsList;
+//	public List<OrderItem> getAllItems(Long orderId){
+//		List<OrderItem>  allItemsList = new ArrayList<OrderItem>();
+//		
+//		String query = "SELECT * FROM orderitem WHERE order_id = ?";
+//		
+//		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, orderId);
+//		
+//		for(Map<String, Object> searchResultMap : resultList) {
+//			OrderItem orderItem1 = new OrderItem();
+//			
+//	        Order order = new Order();
+//	        order.setOrderid(((Number) searchResultMap.get("order_id")).longValue());
+//	        orderItem1.setOrder(order);
+//	        
+//	        Item item = new Item();
+//	        item.setItemid(((Number) searchResultMap.get("item_id")).longValue());
+//	        orderItem1.setItem(item);
+//	        
+//			orderItem1.setQuantity((int)searchResultMap.get("quantity"));
+//			orderItem1.setOrderitemid((Long)searchResultMap.get("orderitemid"));
+//			
+//			allItemsList.add(orderItem1);
+//		}
+//		
+//		return allItemsList;
+//	}
+	public List<OrderItem> getAllItems(Long orderId) {
+	    List<OrderItem> allItemsList = new ArrayList<>();
+
+	    String query =
+	        "SELECT " +
+	        "oi.orderitemid, oi.quantity, " +
+	        "o.orderid AS o_orderid, o.status AS o_status, " +
+	        "i.itemid AS i_itemid, i.name AS i_name, i.price AS i_price, " +
+	        "i.picturelink AS i_picturelink, i.detail AS i_detail, i.genre AS i_genre " +
+	        "FROM orderitem oi " +
+	        "JOIN orders o ON oi.order_id = o.orderid " +
+	        "JOIN item i ON oi.item_id = i.itemid " +
+	        "WHERE oi.order_id = ?";
+
+	    List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, orderId);
+
+	    for (Map<String, Object> row : resultList) {
+	        // Order
+	        Order order = new Order();
+	        order.setOrderid(((Number) row.get("o_orderid")).longValue());
+	        order.setStatus((String) row.get("o_status"));
+
+	        // Item
+	        Item item = new Item();
+	        item.setItemid(((Number) row.get("i_itemid")).longValue());
+	        item.setName((String) row.get("i_name"));
+	        item.setPrice(((Number) row.get("i_price")).intValue());
+	        item.setPicturelink((String) row.get("i_picturelink"));
+	        item.setDetail((String) row.get("i_detail"));
+	        item.setGenre((String) row.get("i_genre"));
+
+	        // OrderItem
+	        OrderItem orderItem = new OrderItem();
+	        orderItem.setOrderitemid(((Number) row.get("orderitemid")).longValue());
+	        orderItem.setQuantity(((Number) row.get("quantity")).intValue());
+	        orderItem.setOrder(order);
+	        orderItem.setItem(item);
+
+	        allItemsList.add(orderItem);
+	    }
+
+	    return allItemsList;
 	}
+
+	
 }
