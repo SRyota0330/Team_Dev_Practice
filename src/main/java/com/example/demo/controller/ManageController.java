@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Item;
+import com.example.demo.entity.User;
 import com.example.demo.service.ItemService;
 import com.example.demo.service.S3Service;
 import com.example.demo.service.StockService;
+import com.example.demo.service.UserService;
 
 @Controller
 public class ManageController {
@@ -25,6 +27,8 @@ public class ManageController {
 	StockService stockService;
 	@Autowired
 	S3Service s3Service;
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/addItems")
 	public String addItems(Model model, HttpSession session) {
@@ -53,25 +57,19 @@ public class ManageController {
 	}
 
 	
-	@GetMapping("/addUsers")
-	public String addUsers(Model model, HttpSession session) {
+	@GetMapping("/editUsers/{userId}")
+	public String editUsers(@PathVariable Long userId, Model model, HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
 		if(userid == 1) {
-			return "admin/addItems";
+			
+			User user = userService.userDetail(userId);
+			model.addAttribute("user", user);
+			return "admin/editUsers";
 		}else {
 			return "user/login";
 		}
 	}
 	
-	@GetMapping("/editUsers")
-	public String editUsers(Model model, HttpSession session) {
-		Long userid = (Long) session.getAttribute("userid");
-		if(userid == 1) {
-			return "admin/addItems";
-		}else {
-			return "user/login";
-		}
-	}
 	
 	@PostMapping("/editItems")
 	public String manageTop(@RequestParam("count") int count, Item item, Model model, HttpSession session) {
@@ -80,6 +78,7 @@ public class ManageController {
 			itemService.editItem(item);
 			stockService.manageCount(count, item);
 			model.addAttribute("allItem", itemService.getAllItem());
+			model.addAttribute("allUser", userService.getAllUser());
 			return "admin/manageItemsAndUsers";
 		}else {
 			return "user/login";
@@ -119,6 +118,21 @@ public class ManageController {
 				return "admin/manageItemsAndUsers";
 			}
 		} else {
+			return "user/login";
+		}
+	}
+	
+	@PostMapping("/editUsers/{id}")
+	public String editUser(@PathVariable("id") Long sessionUserid, User user, Model model, HttpSession session) {
+		Long userid = (Long) session.getAttribute("userid");
+		if(userid == 1) {
+			user.setUserid(sessionUserid);
+			System.out.println(user);
+			userService.editUser(user);
+			model.addAttribute("allItem", itemService.getAllItem());
+			model.addAttribute("allUser", userService.getAllUser());
+			return "admin/manageItemsAndUsers";
+		}else {
 			return "user/login";
 		}
 	}

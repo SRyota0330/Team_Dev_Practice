@@ -31,7 +31,7 @@ public class UserRepository{
 	}
 	
 	public void editUser(User user) {
-	    String query = "UPDATE users SET name = ?, mail = ?, address = ?, password = ? WHERE id = ?";
+	    String query = "UPDATE users SET name = ?, mailaddress = ?, address = ?, password = ? WHERE userid = ?";
 	    jdbcTemplate.update(query, user.getName(), user.getMailaddress(), user.getAddress(), user.getPassword(), user.getUserid());
 	}
 	
@@ -63,8 +63,8 @@ public class UserRepository{
 			User user = new User();
 			
 			user.setName((String)resultMap.get("name"));
-			user.setUserid((Long)resultMap.get("id"));
-			user.setMailaddress((String)resultMap.get("mail"));
+			user.setUserid((Long)resultMap.get("userid"));
+			user.setMailaddress((String)resultMap.get("mailaddress"));
 			user.setAddress((String)resultMap.get("address"));
 			user.setPassword((String)resultMap.get("password"));
 			
@@ -104,7 +104,7 @@ public class UserRepository{
 	
 	public Map<String, Object> userDetail(Long userid){
 		
-		String query = "SELECT * FROM user WHERE userid = ? LIMIT 1";
+		String query = "SELECT * FROM users WHERE userid = ? LIMIT 1";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,userid);
 		 Map<String, Object> resultMap = searchResultList.get(0);

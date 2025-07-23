@@ -39,8 +39,12 @@
 				</div>
 				
 				<div class="auth-buttons">
-					<button class="auth-button">ログイン</button>
-					<button class="auth-button">登録</button>
+					<a th:href="@{login}">
+						<button class="auth-button">ログイン</button>
+					</a>
+					<a th:href="@{signup}">	
+						<button class="auth-button">登録</button>
+					</a>	
 				</div>
 			</header>
 

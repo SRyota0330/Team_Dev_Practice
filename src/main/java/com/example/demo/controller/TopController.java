@@ -34,13 +34,18 @@ public class TopController {
 			model.addAttribute("keywords", " ");
 		}else {
 			List<Item> itemList = itemService.searchItemFromName(keywords);
-			model.addAttribute("items", itemList);
-			model.addAttribute("keywords", keywords);
+			if(itemList.isEmpty()) {
+				model.addAttribute("null", "検索結果はありません。");
+			}else {
+				model.addAttribute("itemListSize", itemList.size());
+				model.addAttribute("items", itemList);
+				model.addAttribute("keywords", keywords);
+			}
 		}
 		return "top";
 	}
 	
-	//商品詳細ページへ遷移
+	//商品詳細ページに遷移
 	@GetMapping(value="/item/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
 		Item item = itemService.itemDetail(id);
