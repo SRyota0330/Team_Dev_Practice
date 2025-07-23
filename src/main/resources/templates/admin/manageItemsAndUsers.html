@@ -20,6 +20,7 @@
 			<li th:text="${allItem.picturelink}"></li>
 			<li th:text="${allItem.genre}"></li>
 			<li th:text="${allItem.detail}"></li>
+			<li th:text="${allItem.stock.count}"></li>
 			<button class="button" th:onclick="'location.href=\'/editItems/' + ${allItem.itemid} + '\';'">編集</button>
 		  </th:block>
 		</ul>
