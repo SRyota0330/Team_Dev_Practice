@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Stock;
 
 @Repository
 public class ItemRepository {
@@ -33,7 +34,7 @@ public class ItemRepository {
 	public List<Item> getAllItem(){
 		List<Item> allItemList = new ArrayList<Item>();
 		
-		String query = "SELECT * FROM item";
+		String query = "SELECT * FROM item INNER JOIN stock on item.itemid = stock.item_id";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query);
 		
@@ -46,6 +47,14 @@ public class ItemRepository {
 			item.setPicturelink((String)resultMap.get("picturelink"));
 			item.setDetail((String)resultMap.get("detail"));
 			item.setGenre((String)resultMap.get("genre"));
+			
+			Stock stock = new Stock();
+			stock.setCount((int)resultMap.get("count"));
+//			stock.setItem((Item)item);
+			stock.setStockid((Long)resultMap.get("stockid"));
+			
+			item.setStock(stock);
+			
 			
 			allItemList.add(item);
 		}
@@ -102,6 +111,24 @@ public class ItemRepository {
 		String query = "SELECT * FROM item WHERE itemid = ? LIMIT 1";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,id);
+		 Map<String, Object> resultMap = searchResultList.get(0);
+			Item item = new Item();
+			
+			item.setName((String)resultMap.get("name"));
+			item.setItemid((Long)resultMap.get("itemid"));
+			item.setPrice((int)resultMap.get("price"));
+			item.setPicturelink((String)resultMap.get("picturelink"));
+			item.setDetail((String)resultMap.get("detail"));
+			item.setGenre((String)resultMap.get("genre"));
+			
+		return item;
+	}
+	
+	public Item recentlyItem() {
+		
+		String query = "SELECT * FROM item ORDER BY itemid DESC LIMIT 1";
+		
+		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query);
 		 Map<String, Object> resultMap = searchResultList.get(0);
 			Item item = new Item();
 			
