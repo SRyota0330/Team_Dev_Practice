@@ -27,7 +27,8 @@ public class AuthController {
 	//login.htmlへ遷移
 	@GetMapping("/login")
 	public String login(Model model, User user) {
-	    return "user/login";
+		return "user/login"; // login.htmlに遷移
+
 	}
 
 //	// 20250722 14:00
@@ -110,6 +111,7 @@ public class AuthController {
 			    if (userid == 1) {
 					model.addAttribute("you", verifiedUser);
 					model.addAttribute("allItem", itemService.getAllItem());
+
 					model.addAttribute("allUser", userService.getAllUser());
 					return "admin/manageItemsAndUsers";
 

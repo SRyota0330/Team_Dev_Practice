@@ -23,4 +23,5 @@ public class OrderService {
 	public void addRecord(Long userid) {
 		orderRepository.addRecord(userid);
 	}
+
 }

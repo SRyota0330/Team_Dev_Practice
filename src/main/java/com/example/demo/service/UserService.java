@@ -30,6 +30,10 @@ public class UserService {
 		return userRepository.getOneUser(id);
 	}
 	
+	public User getOneUser(Long id) {
+		return userRepository.getOneUser(id);
+	}
+	
 	public List<User> getAllUser() {
 		return userRepository.getAllUser();
 	}
