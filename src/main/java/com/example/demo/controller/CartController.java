@@ -57,9 +57,9 @@ public class CartController {
 			}
 			
 			Item item = new Item();
-			item.setItemid(itemid);
-			cartService.addItemToCart(order, item, quantity);
-			return "redirect:/cart";
+			item.setItemid(itemid); //商品をセット
+			cartService.addItemToCart(order, item, quantity); //カートに追加
+			return "redirect:/cart"; // カート一覧へリダイレクト
 		}else {
 			return "redirect:/login";
 		}
