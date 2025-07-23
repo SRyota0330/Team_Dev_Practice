@@ -67,6 +67,7 @@ public class AuthController {
 	        return "redirect:/login";
 		 }
 
+	    
 	}
 
 	@PostMapping("/signup")
