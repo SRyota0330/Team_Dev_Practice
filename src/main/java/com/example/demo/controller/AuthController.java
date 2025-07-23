@@ -46,13 +46,20 @@ public class AuthController {
 	        
 		    // セッションから 'userid' を取得
 		    Long userid = (Long) session.getAttribute("userid");
-
-
+		    
+		    if(userid == 1) {
+		    	model.addAttribute("you", verifiedUser);
+				model.addAttribute("allItem", itemService.getAllItem());
+				model.addAttribute("allUser", userService.getAllUser());
+				return "admin/manageItemsAndUsers";
+		    }else {
+		    	model.addAttribute("mail", "セッション情報⇒" + userid);
+		        System.out.println("ユーザーのメールアドレス: " + userid);
+		        model.addAttribute("you", verifiedUser);
+		        return "top";
+		        
+		    }
 		    // セッションに 'userid' が存在するか確認
-	        model.addAttribute("mail", "セッション情報⇒" + userid);
-	        System.out.println("ユーザーのメールアドレス: " + userid);
-	        model.addAttribute("you", verifiedUser);
-	        return "user/logged";
 	        
 		 }else {
 		    model.addAttribute("mail", "ログインしていません");
@@ -60,6 +67,7 @@ public class AuthController {
 	        return "redirect:/login";
 		 }
 
+	    
 	}
 
 	@PostMapping("/signup")
