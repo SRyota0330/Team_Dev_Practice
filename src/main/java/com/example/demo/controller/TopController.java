@@ -34,8 +34,13 @@ public class TopController {
 			model.addAttribute("keywords", " ");
 		}else {
 			List<Item> itemList = itemService.searchItemFromName(keywords);
-			model.addAttribute("items", itemList);
-			model.addAttribute("keywords", keywords);
+			if(itemList.isEmpty()) {
+				model.addAttribute("null", "検索結果はありません。");
+			}else {
+				model.addAttribute("itemListSize", itemList.size());
+				model.addAttribute("items", itemList);
+				model.addAttribute("keywords", keywords);
+			}
 		}
 		return "top";
 	}
