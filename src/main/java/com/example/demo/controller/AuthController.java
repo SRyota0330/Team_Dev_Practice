@@ -110,6 +110,7 @@ public class AuthController {
 			    if (userid == 1) {
 					model.addAttribute("you", verifiedUser);
 					model.addAttribute("allItem", itemService.getAllItem());
+					model.addAttribute("allUser", userService.getAllUser());
 					return "admin/manageItemsAndUsers";
 
 				} else {
