@@ -1,28 +1,30 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>管理画面</title>
   <link rel="stylesheet" href="manageItemsAndUsers.css">
 </head>
 <body>
+	<h1 th:text="${you}">ようこそ</h1>
   <div class="container">	
     <h2>商品管理</h2>
-    <button class="button" onclick="location.href='add-product.html'">商品追加</button>
+    <button class="button" onclick="location.href='/addItems'">商品追加</button>
 
     <div class="card">
-      <img src="https://via.placeholder.com/80" alt="商品画像">
-      <div>
-        <p>お酒A - 1900円</p>
-        <button class="button">編集・削除</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://via.placeholder.com/80" alt="商品画像">
-      <div>
-        <p>お酒B - 2200円</p>
-        <button class="button">編集・削除</button>
+		<ul>
+		  <th:block th:each="allItem : ${allItem}">
+		    <li th:text="${allItem.name}"></li>
+			<li th:text="${allItem.itemid}"></li>
+			<li th:text="${allItem.price}"></li>
+			<li th:text="${allItem.picturelink}"></li>
+			<li th:text="${allItem.genre}"></li>
+			<li th:text="${allItem.detail}"></li>
+			<li th:text="${allItem.stock.count}"></li>
+			<button class="button" th:onclick="'location.href=\'/editItems/' + ${allItem.itemid} + '\';'">編集</button>
+		  </th:block>
+		</ul>
+        
       </div>
     </div>
 

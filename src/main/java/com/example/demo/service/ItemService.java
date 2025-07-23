@@ -17,9 +17,9 @@ public class ItemService {
 		itemRepository.addItem(item);
 	}
 	
-	public void dellItem(Item item) {
-		itemRepository.dellItem(item.getItemid());
-	}
+//	public void dellItem(Long itemId) {
+//		itemRepository.dellItem(itemId);
+//	}
 	
 	public void editItem(Item item) {
 		itemRepository.editItem(item);
@@ -33,11 +33,16 @@ public class ItemService {
 		return itemRepository.searchItemFromGenre(genre);
 	}
 	
+
 	public List<Item> searchItemFromName(String keywords){
 		return itemRepository.searchItemFromName(keywords);
 	}
 	
 	public Item itemDetail(Long id) {
 		return itemRepository.itemDetail(id);
+	}
+	
+	public Item recentlyItem() {
+		return itemRepository.recentlyItem();
 	}
 }
