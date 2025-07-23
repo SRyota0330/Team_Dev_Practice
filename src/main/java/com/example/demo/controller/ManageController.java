@@ -8,15 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Item;
 import com.example.demo.service.ItemService;
+import com.example.demo.service.StockService;
 
 @Controller
 public class ManageController {
 	
 	@Autowired
 	ItemService itemService;
+	
+	@Autowired
+	StockService stockService;
 	
 	@GetMapping("/addItems")
 	public String addItems(Model model, HttpSession session) {
@@ -35,7 +40,9 @@ public class ManageController {
 	    if (userid == 1) { // 管理者の確認
 	        // 商品IDを使って商品情報を取得
 	        Item item = itemService.itemDetail(itemId);
+	        int count = stockService.getCount(itemId);
 	        model.addAttribute("item", item); // 商品情報をモデルに追加
+	        model.addAttribute("count", count);
 	        return "admin/editItems"; // 編集ページに遷移
 	    } else {
 	        return "user/login"; // ログインページに遷移
@@ -64,10 +71,11 @@ public class ManageController {
 	}
 	
 	@PostMapping("/editItems")
-	public String manageTop(Item item, Model model, HttpSession session) {
+	public String manageTop(@RequestParam("count") int count, Item item, Model model, HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
 		if(userid == 1) {
 			itemService.editItem(item);
+			stockService.manageCount(count, item);
 			model.addAttribute("allItem", itemService.getAllItem());
 			return "admin/manageItemsAndUsers";
 		}else {
@@ -86,11 +94,15 @@ public class ManageController {
 //		}
 //	}
 	
+	
+//	Itemテーブルのみ挿入
 	@PostMapping("/addItems")
 	public String addItems(Item item, Model model, HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
 		if(userid == 1) {
+			
 			itemService.addItem(item);
+			stockService.addCount(0, itemService.recentlyItem());
 			model.addAttribute("allItem", itemService.getAllItem());
 			return "admin/manageItemsAndUsers";
 		}else {
