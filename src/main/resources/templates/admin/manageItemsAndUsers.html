@@ -17,7 +17,9 @@
 		    <li th:text="${allItem.name}"></li>
 			<li th:text="${allItem.itemid}"></li>
 			<li th:text="${allItem.price}"></li>
-			<li th:text="${allItem.picturelink}"></li>
+			<li>
+			  <img th:src="${allItem.picturelink}" alt="商品画像" width="150" height="150">
+			</li>
 			<li th:text="${allItem.genre}"></li>
 			<li th:text="${allItem.detail}"></li>
 			<li th:text="${allItem.stock.count}"></li>
