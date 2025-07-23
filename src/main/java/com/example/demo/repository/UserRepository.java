@@ -100,6 +100,17 @@ public class UserRepository{
 
 	    return null;  // パスワードが一致しない場合
 	}
+	
+	
+	public Map<String, Object> userDetail(Long userid){
+		
+		String query = "SELECT * FROM user WHERE userid = ? LIMIT 1";
+		
+		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,userid);
+		 Map<String, Object> resultMap = searchResultList.get(0);
+			
+		return resultMap;
+	}
 
 
 
