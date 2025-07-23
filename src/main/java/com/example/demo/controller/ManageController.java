@@ -102,7 +102,7 @@ public class ManageController {
 		if(userid == 1) {
 			
 			itemService.addItem(item);
-			stockService.addCount(0, itemService.recentlyItem());
+			stockService.addCount(0, item);
 			model.addAttribute("allItem", itemService.getAllItem());
 			return "admin/manageItemsAndUsers";
 		}else {
