@@ -41,7 +41,7 @@ public class CartController {
 			model.addAttribute("itemList", cartService.getItemFromOrderItem(orderItem));
 			return "purchase/cartList";
 		}else {
-			return "redirect:user/login";
+			return "redirect:/user/login";
 		}
 	}
 	
@@ -51,18 +51,20 @@ public class CartController {
 						  HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
 		if (userid != null) {
-			// 1. 注文中のOrderを取得
-			Order order = orderService.getOrderFromUser(userid);
-
-			// 2. 商品情報を取得（サービスがないならリポジトリから直接取得しても可）
+			Order order = orderService.getOrderFromUser(userid); //カートの中身を取得
+			
+			//ordersにレコード（行）がない場合の処理
+			if(order == null) {
+				orderService.addRecord(userid); //レコードの追加
+				order = orderService.getOrderFromUser(userid); //再度カートの中身を取得
+			}
+			
 			Item item = new Item();
-			item.setItemid(itemid); 
-
-			// 3. カートに追加
-			cartService.addItemToCart(order, item, quantity);
-			return "redirect:/"; // ホーム画面へリダイレクト
+			item.setItemid(itemid); //商品をセット
+			cartService.addItemToCart(order, item, quantity); //カートに追加
+			return "redirect:/cart"; // ホーム画面へリダイレクト
 		}else {
-			return "redirect:/user/login";
+			return "redirect:/login"; //ログイン画面へリダイレクト
 		}
 	}
 }

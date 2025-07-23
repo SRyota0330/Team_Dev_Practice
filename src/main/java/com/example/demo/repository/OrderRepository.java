@@ -24,6 +24,11 @@ public class OrderRepository {
 		String query = "SELECT * FROM orders WHERE user_id = ?";
 		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, userid);
 	
+		//resultListがnullのとき、
+		if(resultList.isEmpty()) {
+			return null;
+		}
+		
 		Map<String, Object> resultMap = resultList.get(0);
 		System.out.println(resultMap+"MAP");
 		
@@ -39,6 +44,11 @@ public class OrderRepository {
 		System.out.println(order.getOrderitems()+"OrderRepositoryのgetOrderFromUser");
 		
 		return order;
+	}
+	
+	public void addRecord(Long userid) {
+		String query = "INSERT INTO orders (user_id, status) VALUES(?, ?)";
+		jdbcTemplate.update(query, userid, "cart");
 	}
 	
 }
