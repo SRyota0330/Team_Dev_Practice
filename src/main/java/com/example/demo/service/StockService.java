@@ -14,5 +14,13 @@ public class StockService {
 	public void manageCount(int count,Item item) {
 		stockRepository.manageCount(count,item);
 	}
+	
+	public void addCount(int count, Item item) {
+		stockRepository.addCount(count, item);
+	}
+	
+	public int getCount(Long itemid) {
+		return stockRepository.getCount(itemid);
+	}
 
 }

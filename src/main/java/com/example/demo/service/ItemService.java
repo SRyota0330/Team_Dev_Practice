@@ -41,4 +41,8 @@ public class ItemService {
 	public Item itemDetail(Long id) {
 		return itemRepository.itemDetail(id);
 	}
+	
+	public Item recentlyItem() {
+		return itemRepository.recentlyItem();
+	}
 }
