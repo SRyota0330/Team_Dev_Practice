@@ -23,6 +23,11 @@ public class OrderRepository {
 	public Order getOrderFromUser(Long userid) {
 		String query = "SELECT * FROM orders WHERE user_id = ?";
 		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, userid);
+	
+		//resultListがnullのとき、
+		if(resultList.isEmpty()) {
+			return null;
+		}
 		
 		Map<String, Object> resultMap = resultList.get(0);
 		System.out.println(resultMap+"MAP");
@@ -32,6 +37,7 @@ public class OrderRepository {
 		order.setOrderid(((Number) resultMap.get("orderid")).longValue());
 		System.out.println(order.getOrderid());
 		order.setStatus((String)resultMap.get("status"));
+
 		
 		List<OrderItem> orderItemList = orderItemRepository.getAllItems(order.getOrderid());
 		
@@ -41,4 +47,10 @@ public class OrderRepository {
 		return order;
 	}
 	
+	public void addRecord(Long userid) {
+		String query = "INSERT INTO orders (user_id, status) VALUES(?, ?)";
+		jdbcTemplate.update(query, userid, "cart");
+	}
+	
+
 }

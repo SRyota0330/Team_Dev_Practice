@@ -17,8 +17,8 @@ public class CartService {
 	@Autowired
 	OrderItemRepository orderItemRepository;
 	
-	public void addItemToCart(Order order, Item item) {
-		orderItemRepository.addItemToCart(order, item);
+	public void addItemToCart(Order order, Item item, int quantity) {
+		orderItemRepository.addItemToCart(order, item, quantity);
 	}
 	
 	public void delItemFromCart(Order order, Item item) {
