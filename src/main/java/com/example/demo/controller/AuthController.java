@@ -27,7 +27,7 @@ public class AuthController {
 	//login.htmlへ遷移
 	@GetMapping("/login")
 	public String login(Model model, User user) {
-		return "user/login"; // login.htmlに遷移
+	    return "user/login";
 	}
 
 //	// 20250722 14:00

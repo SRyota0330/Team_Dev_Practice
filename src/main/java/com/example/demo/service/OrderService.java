@@ -20,4 +20,7 @@ public class OrderService {
 			return order.getOrderid();
 	}
 	
+	public void addRecord(Long userid) {
+		orderRepository.addRecord(userid);
+	}
 }
