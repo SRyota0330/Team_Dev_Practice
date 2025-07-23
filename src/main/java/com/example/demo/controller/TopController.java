@@ -45,7 +45,7 @@ public class TopController {
 		return "top";
 	}
 	
-	//商品詳細ページへ遷移
+	//商品詳細ページに遷移
 	@GetMapping(value="/item/{id}")
 	public String detail(@PathVariable("id") Long id, Model model) {
 		Item item = itemService.itemDetail(id);
