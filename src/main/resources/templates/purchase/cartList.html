@@ -10,7 +10,9 @@
 	<div class="container">
 		<h1>カート</h1>
 		<aside class="sidebar">
-		  <img src="../images/Logo.JPG" alt="ロゴ" width="140" height="70" class="logo">
+			<a th:href="@{/}">
+				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
+			</a>
 		</aside>
 
 		<input type="text" placeholder="検索バー">
@@ -20,22 +22,6 @@
 			<p th:text="${item.name}">商品名</p>
 			<p th:text="${item.price} + '円'">価格</p>
 		</div>
-
-<!--		<div class="card">-->
-<!--			<img src="https://via.placeholder.com/80" alt="商品画像">-->
-<!--			<div>-->
-<!--				<h3>大吟醸75年</h3>-->
-<!--				<p>1900円</p>-->
-<!--			</div>-->
-<!--		</div>-->
-
-<!--		<div class="card">-->
-<!--			<img src="https://via.placeholder.com/80" alt="商品画像">-->
-<!--			<div>-->
-<!--				<h3>角ハイボール62年</h3>-->
-<!--				<p>800円</p>-->
-<!--			</div>-->
-<!--		</div>-->
 
 		<button class="button">レジに進む</button>
 	</div>
