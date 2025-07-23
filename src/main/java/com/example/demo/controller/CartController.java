@@ -34,7 +34,6 @@ public class CartController {
 	public String cart(Model model, HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
 		if(userid != null) {
-//			User loggedUser = userService.getOneUser(userid);
 			Order loggedUserOrder = orderService.getOrderFromUser(userid);
 			Long orderId = orderService.getOrderId(loggedUserOrder);
 			List<OrderItem> orderItem = cartService.getAllItems(orderId);
@@ -51,12 +50,10 @@ public class CartController {
 						  HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
 		if (userid != null) {
-			Order order = orderService.getOrderFromUser(userid); //カートの中身を取得
-			
-			//ordersにレコード（行）がない場合の処理
+			Order order = orderService.getOrderFromUser(userid);
 			if(order == null) {
-				orderService.addRecord(userid); //レコードの追加
-				order = orderService.getOrderFromUser(userid); //再度カートの中身を取得
+				orderService.addRecord(userid);
+				order = orderService.getOrderFromUser(userid);
 			}
 			
 			Item item = new Item();
@@ -64,7 +61,7 @@ public class CartController {
 			cartService.addItemToCart(order, item, quantity); //カートに追加
 			return "redirect:/cart"; // カート一覧へリダイレクト
 		}else {
-			return "redirect:/login"; //ログイン画面へリダイレクト
+			return "redirect:/login";
 		}
 	}
 }

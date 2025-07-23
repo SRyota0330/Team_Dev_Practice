@@ -60,7 +60,6 @@ public class ManageController {
 	@GetMapping("/editUsers/{userId}")
 	public String editUsers(@PathVariable Long userId, Model model, HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
-		
 		if(userid == 1) {
 			
 			User user = userService.userDetail(userId);
