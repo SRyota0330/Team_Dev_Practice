@@ -30,17 +30,18 @@
       </div>
     </div>
 
-    <h2>ユーザー管理</h2>
-
-    <div class="card">
-      <p>
-        ユーザー名：userA<br>
-        メール：test@example.com<br>
-        住所：東京都新宿区<br>
-        パスワード：******<br>
-      </p>
-      <button class="button">編集・削除</button>
-    </div>
-  </div>
+		<div class="card">
+			<ul>
+			  <th:block th:each="allUser : ${allUser}">
+			    <li th:text="${allUser.name}"></li>
+				<li th:text="${allUser.userid}"></li>
+				<li th:text="${allUser.mailaddress}"></li>
+				<li th:text="${allUser.address}"></li>
+				<li th:text="${allUser.password}"></li>
+				<button class="button" th:onclick="'location.href=\'/editUsers/' + ${allUser.userid} + '\';'">編集</button>
+			  </th:block>
+			</ul>  
+		</div>
+	</div>
 </body>
 </html>
