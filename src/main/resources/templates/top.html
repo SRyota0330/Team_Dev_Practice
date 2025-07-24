@@ -18,15 +18,34 @@
 				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
 			</a>	
 			<nav class="category">
-				<h3>カテゴリー</h3>
-				<ul>
-					<li>ワイン</li>
-					<li>ビール</li>
-					<li>ウイスキー</li>
-					<li>果実酒</li>
-					<li>日本酒</li>
-					<li>test</li>
-				</ul>
+				
+				
+				  <h3>カテゴリー</h3>
+				  <div class="btn-group-vertical w-100" role="group">
+				    <a th:href="@{/}"
+				       class="btn btn-outline-secondary"
+				       th:classappend="${selectedGenre} == null ? ' active'">
+				      全て
+				    </a>
+				    <a th:each="g : ${genres}"
+				       th:href="@{'/category/' + ${g}}"
+				       class="btn btn-outline-primary mt-1"
+				       th:text="${g}"
+				       th:classappend="${g.equals(selectedGenre)} ? ' active'">
+				    </a>
+				  </div>
+			
+				
+<!--				<h3>カテゴリー</h3>-->
+<!--				<ul>-->
+<!--					<li>ワイン</li>-->
+<!--					<li>ビール</li>-->
+<!--					<li>ウイスキー</li>-->
+<!--					<li>果実酒</li>-->
+<!--					<li>日本酒</li>-->
+<!--					<li>test</li>-->
+<!--				</ul>-->
+
 			</nav>
 		</aside>
 
