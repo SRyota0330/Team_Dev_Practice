@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Item;
-import com.example.demo.entity.Stock;
 import com.example.demo.service.ItemService;
 
 @Controller
@@ -24,23 +22,25 @@ public class TopController {
     	model.addAttribute("message", "全ての商品");
 		List<Item> allItemList = itemService.getAllItem();
 		
-		List<Item> checkedItemList = new ArrayList<Item>();
+//		List<Item> checkedItemList = new ArrayList<Item>();
+//		
+//		for(Item checkedItem : allItemList) {
+//			
+//			Stock stock = checkedItem.getStock();
+//			
+//			if(stock.getCount() == 0) {
+//				String soldItemName = checkedItem.getName();
+//				soldItemName = "[品切れ中]" + soldItemName;
+//				checkedItem.setName(soldItemName);
+//				
+//				checkedItemList.add(checkedItem);
+//			}else {
+//				checkedItemList.add(checkedItem);
+//			}
+//		}
+//		allItemList = checkedItemList;
 		
-		for(Item checkedItem : allItemList) {
-			
-			Stock stock = checkedItem.getStock();
-			
-			if(stock.getCount() == 0 || stock.getCount() == null) {
-				String soldItemName = checkedItem.getName();
-				soldItemName = "[品切れ中]" + soldItemName;
-				checkedItem.setName(soldItemName);
-				
-				checkedItemList.add(checkedItem);
-			}else {
-				checkedItemList.add(checkedItem);
-			}
-		}
-		allItemList = checkedItemList;
+		itemService.checkStock(allItemList);
 		
 		model.addAttribute("items", allItemList);
 		model.addAttribute("itemListSize", allItemList.size());
@@ -62,6 +62,8 @@ public class TopController {
             } else {
                 itemList = itemService.searchItemFromGenre(genre);
             }
+            
+            itemList = itemService.checkStock(itemList);
 
             model.addAttribute("message", genre+"ジャンルの商品を表示中");
             model.addAttribute("items", itemList);
@@ -80,6 +82,7 @@ public class TopController {
 		if(keywords == null || keywords.isBlank()) {
 			model.addAttribute("message", "全ての商品");
 			List<Item> allItemList = itemService.getAllItem();
+			allItemList = itemService.checkStock(allItemList);
 			model.addAttribute("items", allItemList);
 			model.addAttribute("itemListSize", allItemList.size());
 			model.addAttribute("keywords", "");
@@ -88,10 +91,12 @@ public class TopController {
 			if(itemList.isEmpty()) {
 				model.addAttribute("message", "検索結果はありません");
 				List<Item> allItemList = itemService.getAllItem();
+				allItemList = itemService.checkStock(allItemList);
 				model.addAttribute("items", allItemList);
 				model.addAttribute("itemListSize", "全件表示中");
 				model.addAttribute("keywords", keywords);
 			}else {
+				itemList = itemService.checkStock(itemList);
 				model.addAttribute("message", keywords+"の検索結果です");
 				model.addAttribute("itemListSize", itemList.size());
 				model.addAttribute("items", itemList);
