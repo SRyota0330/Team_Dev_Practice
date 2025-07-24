@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
 	<title>最終確認</title>
-	<link rel="stylesheet" href="cashRegister.css">
+	<link rel="stylesheet" th:href="@{/css/cashRegister.css}">
 </head>
 
 <body>
@@ -16,14 +16,14 @@
 		</aside>
 		<h2>最終確認</h2>
 		<div class="card">
-			<p>1. 木吟醸89年 1900円<br>
-				2. 角ハイボール48年 800円</p>
-			<p><strong>合計: 2700円</strong></p>
+			<p th:text="'合計：' + ${total} + '円'"></p>
+			<p th:text="'配送先：' + ${address}"></p>
 		</div>
-		<div class="card">
-			<p>配送先:<br>
-				東京都千代田区霞が関1丁目1番 国会議事堂</p>
-		</div>
+		
+		<div th:each="item : ${itemList}">
+			<p th:text="${item.name}"></p>
+			<p th:text="${item.price}"></p>
+		</div>	
 		<button class="button">購入を確定する</button>
 	</div>
 </body>
