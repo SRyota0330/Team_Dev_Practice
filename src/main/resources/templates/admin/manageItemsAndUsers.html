@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
-  <title>管理画面</title>
-  <link rel="stylesheet" href="manageItemsAndUsers.css">
+	<meta charset="UTF-8">
+	<title>管理画面</title>
+	<link rel="stylesheet" href="manageItemsAndUsers.css">
 </head>
+
 <body>
 	<h1 th:text="${you}">ようこそ</h1>
-  <div class="container">	
-    <h2>商品管理</h2>
-    <button class="button" onclick="location.href='/addItems'">商品追加</button>
+	<div class="container">
+		<form action="/logout" method="post" style="margin: 0;">
+			<button type="submit">ログアウト</button>
+		</form>
+	</div>
+	<h2>商品管理</h2>
+	<button class="button" onclick="location.href='/addItems'">商品追加</button>
 
-    <div class="card">
+	<div class="card">
 		<ul>
-		  <th:block th:each="allItem : ${allItem}">
-		    <li th:text="${allItem.name}"></li>
-			<li th:text="${allItem.itemid}"></li>
-			<li th:text="${allItem.price}"></li>
-			<li>
-			  <img th:src="${allItem.picturelink}" alt="商品画像" width="150" height="150">
-			</li>
-			<li th:text="${allItem.genre}"></li>
-			<li th:text="${allItem.detail}"></li>
-			<li th:text="${allItem.stock.count}"></li>
-			<button class="button" th:onclick="'location.href=\'/editItems/' + ${allItem.itemid} + '\';'">編集</button>
-		  </th:block>
+			<th:block th:each="allItem : ${allItem}">
+				<li th:text="${allItem.name}"></li>
+				<li th:text="${allItem.itemid}"></li>
+				<li th:text="${allItem.price}"></li>
+				<li>
+					<img th:src="${allItem.picturelink}" alt="商品画像" width="150" height="150">
+				</li>
+				<li th:text="${allItem.genre}"></li>
+				<li th:text="${allItem.detail}"></li>
+				<li th:text="${allItem.stock.count}"></li>
+				<button class="button"
+					th:onclick="'location.href=\'/editItems/' + ${allItem.itemid} + '\';'">編集</button>
+			</th:block>
 		</ul>
-        
-      </div>
-    </div>
-	
-	
+
+	</div>
+	</div>
+
+
 	<h2>ユーザー管理</h2>
-		<div class="card">
-			<ul>
-			  <th:block th:each="allUser : ${allUser}">
-			    <li th:text="${allUser.name}"></li>
+	<div class="card">
+		<ul>
+			<th:block th:each="allUser : ${allUser}">
+				<li th:text="${allUser.name}"></li>
 				<li th:text="${allUser.userid}"></li>
 				<li th:text="${allUser.mailaddress}"></li>
 				<li th:text="${allUser.address}"></li>
 				<li th:text="${allUser.password}"></li>
-				<button class="button" th:onclick="'location.href=\'/editUsers/' + ${allUser.userid} + '\';'">編集</button>
-			  </th:block>
-			</ul>  
-		</div>
+				<button class="button"
+					th:onclick="'location.href=\'/editUsers/' + ${allUser.userid} + '\';'">編集</button>
+			</th:block>
+		</ul>
+	</div>
 	</div>
 </body>
+
 </html>

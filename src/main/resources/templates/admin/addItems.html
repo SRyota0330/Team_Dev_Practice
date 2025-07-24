@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8">
-  <title>商品追加</title>
-  <link rel="stylesheet" href="addItems.css">
+	<meta charset="UTF-8">
+	<title>商品追加</title>
+	<link rel="stylesheet" href="addItems.css">
 </head>
+
 <body>
-  <div class="container">
-	<a href="/admin"><button type="button">← 管理ページに戻る</button></a>
-    <h2>商品追加</h2>
+	<div class="container">
+		<a href="/admin"><button type="button">← 管理ページに戻る</button></a>
+		<form action="/logout" method="post" style="margin: 0;">
+			<button type="submit">ログアウト</button>
+		</form>
+	</div>
+	<h2>商品追加</h2>
 	<form action="/addItems" method="post" enctype="multipart/form-data">
-	    <input type="hidden" name="itemid">
+		<input type="hidden" name="itemid">
 
-	    <label for="name">商品名:</label>
-	    <input type="text" id="name" name="name"><br>
+		<label for="name">商品名:</label>
+		<input type="text" id="name" name="name"><br>
 
-	    <label for="price">商品価格:</label>
-	    <input type="text" id="price" name="price"><br>
+		<label for="price">商品価格:</label>
+		<input type="text" id="price" name="price"><br>
 
-	    <label for="genre">ジャンル:</label>
+		<label for="genre">ジャンル:</label>
 		<select id=genre name="genre">
-		 <option value="ワイン">ワイン</option>
-		 <option value="ビール">ビール</option>
-		 <option value="ウイスキー">ウイスキー</option>
-		 <option value="果実酒">果実酒</option>
-		 <option value="日本酒">日本酒</option>
+			<option value="ワイン">ワイン</option>
+			<option value="ビール">ビール</option>
+			<option value="ウイスキー">ウイスキー</option>
+			<option value="果実酒">果実酒</option>
+			<option value="日本酒">日本酒</option>
 		</select>
 
-	    <label for="detail">商品詳細:</label>
-	    <textarea id="detail" name="detail"></textarea><br>
+		<label for="detail">商品詳細:</label>
+		<textarea id="detail" name="detail"></textarea><br>
 
-	    <label for="file">商品画像:</label>
+		<label for="file">商品画像:</label>
 		<input type="file" id="file" name="file" accept="image/*"><br>
-		
-	    <button type="submit">商品追加</button>
-	  </form>
-  </div>
+
+		<button type="submit">商品追加</button>
+	</form>
+	</div>
 </body>
+
 </html>
