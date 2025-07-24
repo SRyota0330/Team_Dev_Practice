@@ -18,6 +18,8 @@ import com.example.demo.service.UserService;
 @Controller
 public class AuthController {
 	
+	//test0724
+	
 	@Autowired
 	UserService userService;
 	
