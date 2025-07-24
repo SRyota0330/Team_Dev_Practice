@@ -7,6 +7,7 @@
 </head>
 <body>
   <div class="container">
+	<a href="/admin"><button type="button">← 管理ページに戻る</button></a>
     <h2>ユーザー編集</h2>
 	<form th:action="@{/editUsers/{id}(id=${user.userid})}" method="post">
 		    <input type="hidden" th:name="userid" th:value="${user.userid}">
