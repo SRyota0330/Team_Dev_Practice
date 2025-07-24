@@ -34,18 +34,6 @@
 				       th:classappend="${g.equals(selectedGenre)} ? ' active'">
 				    </a>
 				  </div>
-			
-				
-<!--				<h3>カテゴリー</h3>-->
-<!--				<ul>-->
-<!--					<li>ワイン</li>-->
-<!--					<li>ビール</li>-->
-<!--					<li>ウイスキー</li>-->
-<!--					<li>果実酒</li>-->
-<!--					<li>日本酒</li>-->
-<!--					<li>test</li>-->
-<!--				</ul>-->
-
 			</nav>
 		</aside>
 
@@ -70,6 +58,7 @@
 			</header>
 
 			<section class="product-list">
+				<p th:text="${message}"></p>
 				<div th:each="item:${items}">
 				<a class ="product-link" th:href="@{/item/{id}(id=${item.itemid})}">
 				<div class="product-card">
@@ -79,9 +68,11 @@
 				</div>
 				</a>
 				</div>
+				<p th:text="${itemListSize + '件'}"></p>
 			</section>
 			
 		</main>
+		
 	</div>
 </body>
 

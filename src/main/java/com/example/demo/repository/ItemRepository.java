@@ -53,6 +53,7 @@ public class ItemRepository {
 //			stock.setItem((Item)item);
 			stock.setStockid((Long)resultMap.get("stockid"));
 			
+			//itemにストック型をセット
 			item.setStock(stock);
 			
 			
@@ -141,5 +142,7 @@ public class ItemRepository {
 			
 		return item;
 	}
+	
+	
 
 }
