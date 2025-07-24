@@ -1,70 +1,238 @@
-body {
-	font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-	background-color: #fffdf8;
-	margin: 0;
-	padding: 0;
-	color: #333;
+/*body {*/
+/*	font-family: "Hiragino Kaku Gothic ProN", sans-serif;*/
+/*	background-color: #fffdf8;*/
+/*	margin: 0;*/
+/*	padding: 0;*/
+/*	color: #333;*/
+/*}*/
+
+/*.container {*/
+/*	max-width: 800px;*/
+/*	margin: 60px auto;*/
+/*	padding: 30px;*/
+/*	background-color: white;*/
+/*	border-radius: 12px;*/
+/*	box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);*/
+/*	text-align: center;*/
+/*	padding: 20px;*/
+/*	 margin-left:250px;*/
+/*}*/
+
+/*.sidebar {*/
+/*  width: 200px;*/
+/*  background-color: #6e655a;*/
+/*  color: white;*/
+/*  padding: 10px;*/
+/*  box-sizing: border-box;*/
+/*  border-right: 1px solid #333;*/
+/*  height: 100vh;*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+
+/*   横方向中央寄せ用 */
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;   横中央 */
+/*}*/
+
+ 
+
+/*.logo {*/
+/*  margin-top: 10px;        必要に応じて上下の余白 */
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/*.container img {*/
+/*	max-width: 200px;*/
+/*	margin-bottom: 20px;*/
+/*}*/
+
+/*h3 {*/
+/*	margin-top: 0;*/
+/*	font-size: 22px;*/
+/*}*/
+
+/*p {*/
+/*	font-size: 16px;*/
+/*	margin: 10px 0;*/
+/*}*/
+
+/*.button {*/
+/*	background-color: #5b4425;*/
+/*	color: white;*/
+/*	padding: 12px 24px;*/
+/*	border: none;*/
+/*	border-radius: 6px;*/
+/*	font-size: 16px;*/
+/*	margin-top: 20px;*/
+/*	cursor: pointer;*/
+/*}*/
+
+/* 全体共通スタイル */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(#d5c8b3, #f2e2cc);
+  color: #333;
+  min-height: 100vh;
 }
 
+/* メインレイアウト */
 .container {
-	max-width: 800px;
-	margin: 60px auto;
-	padding: 30px;
-	background-color: white;
-	border-radius: 12px;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-	text-align: center;
-	padding: 20px;
-	 margin-left:250px;
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  margin-left: 250px; /* サイドバー分 */
+  box-sizing: border-box;
 }
 
+/* サイドバー（全ページ共通にすべき） */
 .sidebar {
   width: 200px;
   background-color: #6e655a;
   color: white;
-  padding: 10px;
+  padding: 20px 10px; /* ← 統一する */
   box-sizing: border-box;
-  border-right: 1px solid #333;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
 
-  /* 横方向中央寄せ用 */
   display: flex;
   flex-direction: column;
-  align-items: center;  /* 横中央 */
+  align-items: center; /* ← 全部これに統一する */
 }
 
- 
-
+/* ロゴ */
 .logo {
-  margin-top: 10px;       /* 必要に応じて上下の余白 */
-  margin-bottom: 20px;
+  width: 140px;
+  height: auto;
+  border-radius: 10px;
+  margin: 20px 0; /* 上下の余白を均一に */
 }
 
-.container img {
-	max-width: 200px;
-	margin-bottom: 20px;
+/* カテゴリー */
+.category h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
 }
 
+.category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.category li {
+  margin-bottom: 5px;
+  font-size: 16px;
+  text-align: left;
+}
+
+/* ボタン共通 */
+.button,
+.auth-button,
+.search-button {
+  background-color: #5b4425;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover,
+.auth-button:hover,
+.search-button:hover {
+  background-color: #7a5f41;
+}
+
+/* 検索・認証エリア */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+/* 商品一覧 */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  border-radius: 20px;
+}
+
+/* 商品カード */
+.product-card {
+  background-color: white;
+  border-radius: 20px;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* 汎用見出し・テキスト */
 h3 {
-	margin-top: 0;
-	font-size: 22px;
+  margin-top: 0;
+  font-size: 22px;
 }
 
 p {
-	font-size: 16px;
-	margin: 10px 0;
-}
-
-.button {
-	background-color: #5b4425;
-	color: white;
-	padding: 12px 24px;
-	border: none;
-	border-radius: 6px;
-	font-size: 16px;
-	margin-top: 20px;
-	cursor: pointer;
+  font-size: 16px;
+  margin: 10px 0;
 }

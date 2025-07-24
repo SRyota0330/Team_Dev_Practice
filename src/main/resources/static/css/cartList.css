@@ -1,23 +1,30 @@
-body {
-  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-  background-color: #f8f4ec;
+/* 全体背景とフォント設定 */
+body, html {
   margin: 0;
   padding: 0;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(#d5c8b3, #f2e2cc);
   color: #333;
+  min-height: 100vh;
 }
 
+/* レイアウト全体 */
 .container {
   max-width: 900px;
   margin: 50px auto;
-  padding: 20px;
-  margin-left:250px;
+  padding: 30px;
+  margin-left: 250px; /* サイドバーを避ける */
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
-
+/* サイドバー（全ページ共通にすべき） */
 .sidebar {
   width: 200px;
   background-color: #6e655a;
   color: white;
-  padding: 20px 10px;
+  padding: 20px 10px; /* ← 統一する */
   box-sizing: border-box;
   height: 100vh;
   position: fixed;
@@ -26,16 +33,18 @@ body {
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* ← ここを center → flex-start に修正 */
+  align-items: center; /* ← 全部これに統一する */
 }
- 
+
+/* ロゴ */
 .logo {
   width: 140px;
   height: auto;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin: 20px 0; /* 上下の余白を均一に */
 }
- 
+
+/* 入力フォーム */
 input[type="text"] {
   width: 60%;
   padding: 10px;
@@ -43,23 +52,38 @@ input[type="text"] {
   font-size: 16px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s;
 }
 
+input[type="text"]:focus {
+  outline: none;
+  border-color: #8b6f4e;
+}
+
+/* カード（TOPページと統一） */
 .card {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 20px;
   background-color: white;
-  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 .card img {
   max-width: 80px;
   margin-right: 20px;
+  border-radius: 8px;
 }
 
+/* ボタン（TOPページと同じトーン） */
 .button {
   background-color: #5b4425;
   color: white;
@@ -69,4 +93,9 @@ input[type="text"] {
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #7a5f41;
 }

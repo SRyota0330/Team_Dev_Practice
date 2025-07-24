@@ -1,40 +1,58 @@
-body {
-  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-  background-color: #fcf8f2;
+/* 全体背景・フォント */
+body, html {
   margin: 0;
-  padding: 0;
+  padding: 40px 20px;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(#d5c8b3, #f2e2cc);
+  min-height: 100vh;
+  color: #333;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.container {
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 30px;
+/* コンテンツ中央寄せ */
+.main-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
   background-color: white;
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  box-shadow: 0 0 12px rgba(0,0,0,0.08);
 }
 
-.container img {
-  max-width: 150px;
+/* 上部ボタン群 */
+.top-buttons {
+  display: flex;
+  justify-content: flex-end;  /* ここを右寄せに */
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+/* ラベル */
+label {
+  font-weight: bold;
   display: block;
-  margin: 0 auto 20px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 16px;
 }
 
+/* 入力欄 */
 input[type="text"],
-input[type="number"],
-textarea {
+input[type="email"],
+input[type="password"] {
   width: 100%;
   padding: 10px;
-  margin: 10px 0 15px;
-  border-radius: 6px;
+  font-size: 16px;
   border: 1px solid #ccc;
-  font-size: 15px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: inherit;
+  margin-bottom: 16px;
 }
 
-textarea {
-  height: 100px;
-}
-
+/* ボタン共通 */
 .button {
   background-color: #5b4425;
   color: white;
@@ -42,10 +60,21 @@ textarea {
   border: none;
   border-radius: 6px;
   font-size: 16px;
-  margin-right: 10px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block;
+  margin-top: 10px;
 }
 
-.button[style*="darkred"] {
+.button:hover {
+  background-color: #7a5f41;
+}
+
+/* 危険ボタン */
+.button.danger {
   background-color: darkred;
+}
+
+.button.danger:hover {
+  background-color: #a00000;
 }
