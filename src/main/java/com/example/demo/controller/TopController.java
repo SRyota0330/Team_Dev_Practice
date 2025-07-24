@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Stock;
 import com.example.demo.service.ItemService;
 
 @Controller
@@ -21,6 +23,25 @@ public class TopController {
     public String top(Model model) {
     	model.addAttribute("message", "全ての商品");
 		List<Item> allItemList = itemService.getAllItem();
+		
+		List<Item> checkedItemList = new ArrayList<Item>();
+		
+		for(Item checkedItem : allItemList) {
+			
+			Stock stock = checkedItem.getStock();
+			
+			if(stock.getCount() == 0 || stock.getCount() == null) {
+				String soldItemName = checkedItem.getName();
+				soldItemName = "[品切れ中]" + soldItemName;
+				checkedItem.setName(soldItemName);
+				
+				checkedItemList.add(checkedItem);
+			}else {
+				checkedItemList.add(checkedItem);
+			}
+		}
+		allItemList = checkedItemList;
+		
 		model.addAttribute("items", allItemList);
 		model.addAttribute("itemListSize", allItemList.size());
 		model.addAttribute("keywords", "");

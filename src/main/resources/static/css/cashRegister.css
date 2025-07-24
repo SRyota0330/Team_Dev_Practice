@@ -35,11 +35,13 @@ body {
   align-items: center;  /* 横中央 */
 }
 
- 
+
 
 .logo {
-  margin-top: 10px;       /* 必要に応じて上下の余白 */
-  margin-bottom: 20px;
+	width: 140px;
+	height: auto;
+	border-radius: 10px;
+	margin-bottom: 20px;
 }
 
 .card {

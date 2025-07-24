@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
 	<title>カート</title>
-	<link rel="stylesheet" href="cartList.css">
+	<link rel="stylesheet" th:href="@{/css/cartList.css}">
 </head>
 <body>
 	<div class="container">
@@ -13,7 +13,7 @@
 			<a th:href="@{/}">
 				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
 			</a>
-		</aside>
+		</aside>	
 
 		<input type="text" placeholder="検索バー">
 		
@@ -23,7 +23,9 @@
 			<p th:text="${item.price} + '円'">価格</p>
 		</div>
 
-		<button class="button">レジに進む</button>
+		<a th:href="@{checkout}">
+			<button class="button">レジに進む</button>
+		</a>	
 	</div>
 </body>
 
