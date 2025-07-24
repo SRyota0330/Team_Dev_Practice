@@ -17,14 +17,36 @@ public class TopController {
     @Autowired
     private ItemService itemService;
     
-    //トップページ
-	@GetMapping(value="/")
-	public String toppage(Model model) {
-		List<Item> itemList = itemService.getAllItem();
-		model.addAttribute("items",itemList);
-		return "top";
-	}
+//    //トップページ
+//	@GetMapping(value="/")
+//	public String toppage(Model model) {
+//		List<Item> itemList = itemService.getAllItem();
+//		model.addAttribute("items",itemList);
+//		return "top";
+//	}
 	
+    
+
+        @GetMapping(value={"/", "/category/{genre}"})
+        public String listByGenre(
+                @PathVariable(value="genre", required=false) String genre,
+                Model model) {
+
+            List<Item> itemList;
+            if (genre == null || genre.isBlank()) {
+                itemList = itemService.getAllItem();
+            } else {
+                itemList = itemService.searchItemFromGenre(genre);
+            }
+
+            model.addAttribute("items", itemList);
+            model.addAttribute("selectedGenre", genre);
+            model.addAttribute("genres", List.of("ワイン","ビール","ウイスキー","果実酒","日本酒"));
+            return "top";
+        }
+
+    
+    
 	//検索結果一覧
 	@GetMapping(value="/search")
 	public String search(@RequestParam(name = "keywords", required = false) String keywords, Model model) {
