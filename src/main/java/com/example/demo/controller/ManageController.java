@@ -136,5 +136,15 @@ public class ManageController {
 			return "user/login";
 		}
 	}
-
+	@GetMapping("/admin")
+	public String adminHome(Model model, HttpSession session) {
+	    Long userid = (Long) session.getAttribute("userid");
+	    if (userid == 1) {
+	        model.addAttribute("allItem", itemService.getAllItem());
+	        model.addAttribute("allUser", userService.getAllUser());
+	        return "admin/manageItemsAndUsers"; // 管理トップページHTML
+	    } else {
+	        return "user/login"; // 権限がない場合はログイン画面へ
+	    }
+	}
 }
