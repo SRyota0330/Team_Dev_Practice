@@ -1,44 +1,253 @@
-body {
-  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-  background-color: #fdfaf5;
+/* manageItemsAndUsers.css */
+
+body, html {
   margin: 0;
-  padding: 0;
+  padding: 40px 20px;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(#d5c8b3, #f2e2cc);
+  min-height: 100vh;
   color: #333;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
+.main-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
 }
 
-h2 {
-  margin-top: 30px;
-  margin-bottom: 15px;
-}
-
-.card {
+/* 上部ボタン */
+.top-buttons {
   display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  justify-content: space-between;
-}
-
-.card img {
-  max-width: 80px;
-  margin-right: 20px;
+  justify-content: flex-end;
+  margin-bottom: 30px;
 }
 
 .button {
   background-color: #5b4425;
   color: white;
-  padding: 8px 14px;
+  padding: 12px 20px;
   border: none;
   border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background-color: #7a5f41;
+}
+
+.button.danger {
+  background-color: darkred;
+}
+
+.button.danger:hover {
+  background-color: #a00000;
+}
+
+/* 横並び2列ラッパー */
+.management-columns {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap; /* 幅狭いときは縦並び */
+  margin-bottom: 50px;
+}
+
+/* 各管理セクション */
+.management-section {
+  flex: 1 1 500px; /* 最小幅500px、均等に広げる */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  max-height: 85vh;
+  overflow-y: auto; /* ← ここだけスクロール */
+}
+
+/* セクションタイトル */
+.management-section h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+/* 商品追加ボタン */
+.management-section > .button {
+  margin-bottom: 20px;
+}
+
+/* カードリスト */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* max-height と overflow は削除し、スクロールは親でのみ発生 */
+}
+
+/* 個別カード */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #fefcf7;
+}
+
+/* 商品画像 */
+.card img {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  border-radius: 6px;
+  background-color: white;
+}
+
+/* カード情報 */
+.card-info {
+  flex: 1;
   font-size: 14px;
 }
+
+.card-info p {
+  margin: 3px 0;
+}
+
+/* 編集ボタンをカード右端に */
+.card > button {
+  white-space: nowrap;
+}
+/* manageItemsAndUsers.css */
+
+/*body, html {*/
+/*  margin: 0;*/
+/*  padding: 40px 20px;*/
+/*  font-family: "Hiragino Kaku Gothic ProN", sans-serif;*/
+/*  background: linear-gradient(#d5c8b3, #f2e2cc);*/
+/*  min-height: 100vh;*/
+/*  color: #333;*/
+/*  box-sizing: border-box;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.main-wrapper {*/
+/*  max-width: 1200px;*/
+/*  margin: 0 auto;*/
+/*  text-align: left;*/
+/*}*/
+
+/* 上部ボタン */
+/*.top-buttons {*/
+/*  display: flex;*/
+/*  justify-content: flex-end;*/
+/*  margin-bottom: 30px;*/
+/*}*/
+
+/*.button {*/
+/*  background-color: #5b4425;*/
+/*  color: white;*/
+/*  padding: 12px 20px;*/
+/*  border: none;*/
+/*  border-radius: 6px;*/
+/*  font-size: 16px;*/
+/*  cursor: pointer;*/
+/*  transition: background-color 0.3s;*/
+/*  margin-top: 10px;*/
+/*  display: inline-block;*/
+/*  margin-right: 10px;*/
+/*}*/
+
+/*.button:hover {*/
+/*  background-color: #7a5f41;*/
+/*}*/
+
+/*.button.danger {*/
+/*  background-color: darkred;*/
+/*}*/
+
+/*.button.danger:hover {*/
+/*  background-color: #a00000;*/
+/*}*/
+
+/* 横並び2列ラッパー */
+/*.management-columns {*/
+/*  display: flex;*/
+/*  gap: 40px;*/
+/*  justify-content: center;*/
+/*  flex-wrap: wrap;  幅狭いときは縦並び */
+/*  margin-bottom: 50px;*/
+/*}*/
+
+/* 各管理セクション */
+/*.management-section {*/
+/*  flex: 1 1 500px;  最小幅500px、均等に広げる */
+/*  background-color: white;*/
+/*  padding: 20px;*/
+/*  border-radius: 10px;*/
+/*  box-sizing: border-box;*/
+/*  border: 1px solid #ccc;*/
+/*  max-height: 85vh;*/
+/*  overflow-y: auto;*/
+/*}*/
+
+/* セクションタイトル */
+/*.management-section h2 {*/
+/*  margin-top: 0;*/
+/*  margin-bottom: 15px;*/
+/*}*/
+
+/* 商品追加ボタン */
+/*.management-section > .button {*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/* カードリスト */
+/*.card-list {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 15px;*/
+/*  max-height: 70vh;*/
+/*  overflow-y: auto;*/
+/*}*/
+
+/* 個別カード */
+/*.card {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  gap: 15px;*/
+/*  border: 1px solid #ccc;*/
+/*  border-radius: 8px;*/
+/*  padding: 12px;*/
+/*  background-color: #fefcf7;*/
+/*}*/
+
+/* 商品画像 */
+/*.card img {*/
+/*  max-width: 80px;*/
+/*  max-height: 80px;*/
+/*  object-fit: contain;*/
+/*  border-radius: 6px;*/
+/*  background-color: white;*/
+/*}*/
+
+/* カード情報 */
+/*.card-info {*/
+/*  flex: 1;*/
+/*  font-size: 14px;*/
+/*}*/
+
+/*.card-info p {*/
+/*  margin: 3px 0;*/
+/*}*/
+
+/* 編集ボタンをカード右端に */
+/*.card > button {*/
+/*  white-space: nowrap;*/
+/*}*/

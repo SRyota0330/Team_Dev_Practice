@@ -1,73 +1,87 @@
-body {
-	font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-	background-color: #faf7f2;
-	margin: 0;
-	padding: 0;
-	color: #333;
+/* 全体背景とフォント設定 */
+body, html {
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(#d5c8b3, #f2e2cc);
+  margin: 0;
+  padding: 0;
+  color: #333;
+  min-height: 100vh;
 }
 
+/* コンテンツ本体 */
 .container {
-	max-width: 700px;
-	margin: 60px auto;
-	padding: 25px;
-	background-color: #fff;
-	border-radius: 10px;
-	box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
-	padding: 20px;
-	margin-left:250px;
+  max-width: 700px;
+  margin: 60px auto;
+  margin-left: 250px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
 
+/* サイドバー（全ページ共通にすべき） */
 .sidebar {
   width: 200px;
   background-color: #6e655a;
   color: white;
-  padding: 10px;
+  padding: 20px 10px; /* ← 統一する */
   box-sizing: border-box;
-  border-right: 1px solid #333;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
 
-  /* 横方向中央寄せ用 */
   display: flex;
   flex-direction: column;
-  align-items: center;  /* 横中央 */
+  align-items: center; /* ← 全部これに統一する */
 }
 
-
-
+/* ロゴ */
 .logo {
-	width: 140px;
-	height: auto;
-	border-radius: 10px;
-	margin-bottom: 20px;
+  width: 140px;
+  height: auto;
+  border-radius: 10px;
+  margin: 20px 0; /* 上下の余白を均一に */
 }
 
+
+/* カード表示 */
 .card {
-	background-color: #fdfaf7;
-	padding: 15px;
-	border: 1px solid #ccc;
-	margin-bottom: 20px;
-	border-radius: 8px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 p {
-	font-size: 16px;
-	line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 strong {
-	font-weight: bold;
-	color: #5b4425;
+  font-weight: bold;
+  color: #5b4425;
 }
 
+/* ボタン（TOPページ準拠） */
 .button {
-	background-color: #5b4425;
-	color: white;
-	padding: 14px 20px;
-	border: none;
-	font-size: 16px;
-	border-radius: 6px;
-	cursor: pointer;
+  background-color: #5b4425;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #7a5f41;
 }
