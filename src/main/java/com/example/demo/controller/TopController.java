@@ -26,7 +26,7 @@ public class TopController {
 //	}
 	
     
-
+//0724
         @GetMapping(value={"/", "/category/{genre}"})
         public String listByGenre(
                 @PathVariable(value="genre", required=false) String genre,
