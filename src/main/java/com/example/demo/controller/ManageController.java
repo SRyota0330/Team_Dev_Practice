@@ -147,4 +147,10 @@ public class ManageController {
 	        return "user/login"; // 権限がない場合はログイン画面へ
 	    }
 	}
+	@PostMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate(); // セッションを破棄
+	    return "redirect:/login"; // ← このURLがログインページのURLに合ってるか確認！
+	}
+
 }
