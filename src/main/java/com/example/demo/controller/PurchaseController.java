@@ -57,11 +57,6 @@ public class PurchaseController {
 	//カートから削除するメソッド
 	
 	//購入確定ボタン
-	@GetMapping(value="/confirm")
-	public String finishShopping(Model model) {
-		return "purchase/purchased";
-	}
-	
 	@PostMapping(value="/confirm")
 	public String confirm(HttpSession session, Model model){
 		//セッションからログインユーザーを取得
