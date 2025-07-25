@@ -49,12 +49,12 @@ public class UserService {
 		return user;
 	}
 	
-	public User userVerify(String mail, String password) {
+	 public User userVerify(String mail, String password) {
 		System.out.println("サービス");
 	    return userRepository.userVerify(mail, password);
 	}
 	
-	
-	
-
+	public String getAddressFromUser(Long userId) {
+		return userRepository.getAddressFromUser(userId);
+	}
 }

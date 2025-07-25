@@ -1,49 +1,128 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>管理画面</title>
-  <link rel="stylesheet" href="manageItemsAndUsers.css">
-</head>
-<body>
-	<h1 th:text="${you}">ようこそ</h1>
-  <div class="container">	
-    <h2>商品管理</h2>
-    <button class="button" onclick="location.href='/addItems'">商品追加</button>
 
-    <div class="card">
-		<ul>
-		  <th:block th:each="allItem : ${allItem}">
-		    <li th:text="${allItem.name}"></li>
-			<li th:text="${allItem.itemid}"></li>
-			<li th:text="${allItem.price}"></li>
-			<li>
-			  <img th:src="${allItem.picturelink}" alt="商品画像" width="150" height="150">
-			</li>
-			<li th:text="${allItem.genre}"></li>
-			<li th:text="${allItem.detail}"></li>
-			<li th:text="${allItem.stock.count}"></li>
-			<button class="button" th:onclick="'location.href=\'/editItems/' + ${allItem.itemid} + '\';'">編集</button>
-		  </th:block>
-		</ul>
-        
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>管理画面</title>
+  <link rel="stylesheet" href="/css/manageItemsAndUsers.css" />
+</head>
+
+<body>
+  <div class="top-buttons">
+    <form action="/logout" method="post" style="margin: 0;">
+      <button type="submit" class="button danger">ログアウト</button>
+    </form>
+  </div>
+
+  <div class="main-wrapper">
+    <h1 th:text="${you}">ようこそ</h1>
+
+    <div class="management-columns">
+      <!-- 商品管理 -->
+      <section class="management-section">
+        <h2>商品管理</h2>
+        <button class="button" onclick="location.href='/addItems'">商品追加</button>
+
+        <div class="card-list">
+          <th:block th:each="allItem : ${allItem}">
+            <div class="card">
+              <img th:src="${allItem.picturelink}" alt="商品画像" />
+              <div class="card-info">
+                <p><strong>商品名:</strong> <span th:text="${allItem.name}"></span></p>
+                <p><strong>商品ID:</strong> <span th:text="${allItem.itemid}"></span></p>
+                <p><strong>価格:</strong> ¥<span th:text="${allItem.price}"></span></p>
+                <p><strong>ジャンル:</strong> <span th:text="${allItem.genre}"></span></p>
+                <p><strong>詳細:</strong> <span th:text="${allItem.detail}"></span></p>
+                <p><strong>在庫数:</strong> <span th:text="${allItem.stock.count}"></span></p>
+              </div>
+              <button class="button" 
+                th:onclick="'location.href=\'/editItems/' + ${allItem.itemid} + '\';'">編集</button>
+            </div>
+          </th:block>
+        </div>
+      </section>
+
+      <!-- ユーザー管理 -->
+      <section class="management-section">
+        <h2>ユーザー管理</h2>
+        <div class="card-list">
+          <th:block th:each="allUser : ${allUser}">
+            <div class="card">
+              <div class="card-info">
+                <p><strong>名前:</strong> <span th:text="${allUser.name}"></span></p>
+                <p><strong>ユーザーID:</strong> <span th:text="${allUser.userid}"></span></p>
+                <p><strong>メールアドレス:</strong> <span th:text="${allUser.mailaddress}"></span></p>
+                <p><strong>住所:</strong> <span th:text="${allUser.address}"></span></p>
+                <p><strong>パスワード:</strong> <span th:text="${allUser.password}"></span></p>
+              </div>
+              <button class="button" 
+                th:onclick="'location.href=\'/editUsers/' + ${allUser.userid} + '\';'">編集</button>
+            </div>
+          </th:block>
+        </div>
+      </section>
     </div>
-	
-	
-	<h2>ユーザー管理</h2>
-		<div class="card">
-			<ul>
-			  <th:block th:each="allUser : ${allUser}">
-			    <li th:text="${allUser.name}"></li>
-				<li th:text="${allUser.userid}"></li>
-				<li th:text="${allUser.mailaddress}"></li>
-				<li th:text="${allUser.address}"></li>
-				<li th:text="${allUser.password}"></li>
-				<button class="button" th:onclick="'location.href=\'/editUsers/' + ${allUser.userid} + '\';'">編集</button>
-			  </th:block>
-			</ul>  
-		</div>
-	</div>
+  </div>
 </body>
+
 </html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="ja" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--  <meta charset="UTF-8" />-->
+<!--  <title>管理画面</title>-->
+<!--  <link rel="stylesheet" href="/css/manageItemsAndUsers.css" />-->
+<!--</head>-->
+
+<!--<body>-->
+<!--  <div class="top-buttons">-->
+<!--    <form action="/logout" method="post" style="margin: 0;">-->
+<!--      <button type="submit" class="button danger">ログアウト</button>-->
+<!--    </form>-->
+<!--  </div>-->
+
+<!--  <div class="main-wrapper">-->
+<!--    <h1 th:text="${you}">ようこそ</h1>-->
+
+<!--    <h2>商品管理</h2>-->
+<!--    <button class="button" onclick="location.href='/addItems'">商品追加</button>-->
+
+<!--    <div class="card-list">-->
+<!--      <th:block th:each="allItem : ${allItem}">-->
+<!--        <div class="card">-->
+<!--          <img th:src="${allItem.picturelink}" alt="商品画像" />-->
+<!--          <div class="card-info">-->
+<!--            <p><strong>商品名:</strong> <span th:text="${allItem.name}"></span></p>-->
+<!--            <p><strong>商品ID:</strong> <span th:text="${allItem.itemid}"></span></p>-->
+<!--            <p><strong>価格:</strong> ¥<span th:text="${allItem.price}"></span></p>-->
+<!--            <p><strong>ジャンル:</strong> <span th:text="${allItem.genre}"></span></p>-->
+<!--            <p><strong>詳細:</strong> <span th:text="${allItem.detail}"></span></p>-->
+<!--            <p><strong>在庫数:</strong> <span th:text="${allItem.stock.count}"></span></p>-->
+<!--          </div>-->
+<!--          <button class="button" -->
+<!--            th:onclick="'location.href=\'/editItems/' + ${allItem.itemid} + '\';'">編集</button>-->
+<!--        </div>-->
+<!--      </th:block>-->
+<!--    </div>-->
+
+<!--    <h2>ユーザー管理</h2>-->
+<!--    <div class="card-list">-->
+<!--      <th:block th:each="allUser : ${allUser}">-->
+<!--        <div class="card">-->
+<!--          <div class="card-info">-->
+<!--            <p><strong>名前:</strong> <span th:text="${allUser.name}"></span></p>-->
+<!--            <p><strong>ユーザーID:</strong> <span th:text="${allUser.userid}"></span></p>-->
+<!--            <p><strong>メールアドレス:</strong> <span th:text="${allUser.mailaddress}"></span></p>-->
+<!--            <p><strong>住所:</strong> <span th:text="${allUser.address}"></span></p>-->
+<!--            <p><strong>パスワード:</strong> <span th:text="${allUser.password}"></span></p>-->
+<!--          </div>-->
+<!--          <button class="button" -->
+<!--            th:onclick="'location.href=\'/editUsers/' + ${allUser.userid} + '\';'">編集</button>-->
+<!--        </div>-->
+<!--      </th:block>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</body>-->
+
+<!--</html>-->

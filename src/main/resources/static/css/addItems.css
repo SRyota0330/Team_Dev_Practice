@@ -1,0 +1,83 @@
+/* 全体背景・フォント */
+body, html {
+  margin: 0;
+  padding: 40px 20px;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(#d5c8b3, #f2e2cc);
+  min-height: 100vh;
+  color: #333;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* コンテンツ中央寄せ */
+.main-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* ラベル */
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+/* 入力欄など */
+input[type="text"],
+input[type="number"],
+select,
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 16px;
+}
+
+textarea {
+  min-height: 80px;
+}
+
+/* ボタン共通 */
+.button {
+  background-color: #5b4425;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background-color: #7a5f41;
+}
+
+/* 危険ボタン */
+.button.danger {
+  background-color: darkred;
+}
+
+.button.danger:hover {
+  background-color: #a00000;
+}
+
+/* 上部ボタン群 */
+.top-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
