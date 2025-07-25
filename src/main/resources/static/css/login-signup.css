@@ -1,0 +1,76 @@
+/* 全体背景とフォント設定 */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: linear-gradient(#d5c8b3, #f2e2cc);
+  min-height: 100vh;
+}
+
+/* ログイン・サインアップ用コンテナ */
+.container {
+  max-width: 400px;
+  margin: 60px auto;
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* ロゴや見出し */
+.container h1 {
+  font-size: 32px;
+  color: #5b4425;
+  margin-bottom: 20px;
+}
+
+.container h2 {
+  font-size: 20px;
+  color: #333;
+  margin: 20px 0 10px;
+}
+
+/* 入力フィールド */
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* ボタン共通 */
+.button {
+  width: 100%;
+  background-color: #6e655a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+}
+
+.button:hover {
+  background-color: #7a5f41;
+}
+
+/* リンク */
+.container a {
+  color: #5b4425;
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.container a:hover {
+  text-decoration: underline;
+}

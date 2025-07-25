@@ -133,6 +133,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.entity.Item;
 import com.example.demo.entity.User;
 import com.example.demo.service.ItemService;
+import com.example.demo.service.StockService;
 import com.example.demo.service.UserService;
 
 @Controller
@@ -143,6 +144,9 @@ public class TopController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private StockService stockService;
 
     // ログイン状態を設定する共通処理
     private void setLoginStatus(HttpSession session, Model model) {
@@ -226,7 +230,9 @@ public class TopController {
         setLoginStatus(session, model);
 
         Item item = itemService.itemDetail(id);
+        int stock = stockService.getCount(id);
         model.addAttribute("item", item);
+        model.addAttribute("stock", stock);
 
         return "purchase/itemDetail";
     }
