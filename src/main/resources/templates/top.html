@@ -74,7 +74,7 @@
 			</a>
 	
 			<!-- 在庫がない場合はリンクなし -->
-			<div th:if="${item.stock.count == 0}" class="product-card product-card-disabled">
+			<div th:if="${item.stock.count <= 0}" class="product-card product-card-disabled">
 				<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
 				<p th:text="${item.name}">商品名</p>
 				<p th:text="${item.price + '円'}">価格</p>
