@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +26,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderid;
-    
-    @Column(nullable = false)
-    private String status;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
