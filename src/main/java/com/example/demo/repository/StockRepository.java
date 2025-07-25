@@ -30,7 +30,5 @@ public class StockRepository {
 		Map<String, Object> resultMap = searchResultList.get(0);
 		return (int)resultMap.get("count");
 	}
-	
-
 }
 
