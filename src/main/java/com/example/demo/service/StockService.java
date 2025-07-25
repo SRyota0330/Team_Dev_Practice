@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Stock;
 import com.example.demo.repository.StockRepository;
 
 @Service
@@ -21,6 +22,10 @@ public class StockService {
 	
 	public int getCount(Long itemid) {
 		return stockRepository.getCount(itemid);
+	}
+	
+	public Stock getStock(Long itemid) {
+		return stockRepository.getStock(itemid);
 	}
 
 }

@@ -17,6 +17,9 @@ public class CartService {
 	@Autowired
 	OrderItemRepository orderItemRepository;
 	
+	@Autowired
+	StockService stockService;
+	
 	public void addItemToCart(Order order, Item item, int quantity) {
 		
 		if(orderItemRepository.idCheck(item.getItemid(),order.getOrderid())==true) {
@@ -40,8 +43,11 @@ public class CartService {
 	
 	public List<Item> getItemFromOrderItem(List<OrderItem> list){
 		List<Item> resultList = new ArrayList<Item>();
-		for(OrderItem item : list) {
-			resultList.add(item.getItem());
+		for(OrderItem orderItem : list) {
+			Item item = orderItem.getItem();
+			
+			item.setStock(stockService.getStock(item.getItemid()));
+			resultList.add(item);
 		}
 		System.out.println(resultList+"getItemFromOrderItem");
 		return resultList;
