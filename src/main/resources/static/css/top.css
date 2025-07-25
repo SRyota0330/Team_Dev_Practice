@@ -207,3 +207,25 @@ body, html {
   font-size: 16px;
   color: #555;
 }
+
+/* 通常の商品カード（ホバーあり） */
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* 売り切れ商品のカード（ホバー無効） */
+.product-card-disabled {
+  pointer-events: none;     /* クリック無効 */
+  background-color: #ddd;   /* グレー背景などで区別 */
+  opacity: 0.6;
+}
+
+/* 売り切れカードにホバーしても何も起きないように */
+.product-card-disabled:hover {
+  transform: none;
+  box-shadow: none;
+  cursor: default;
+}
+
