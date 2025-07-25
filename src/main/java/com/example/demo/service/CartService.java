@@ -18,7 +18,11 @@ public class CartService {
 	OrderItemRepository orderItemRepository;
 	
 	public void addItemToCart(Order order, Item item, int quantity) {
-		orderItemRepository.addItemToCart(order, item, quantity);
+		if(orderItemRepository.idCheck(item.getItemid(),order.getOrderid())==true) {
+			orderItemRepository.updateQuantityOfCart(order, item, quantity);
+		}else {
+			orderItemRepository.addItemToCart(order, item, quantity);
+		}
 	}
 	
 	public void delItemFromCart(Order order, Item item) {
@@ -40,6 +44,10 @@ public class CartService {
 		}
 		System.out.println(resultList+"getItemFromOrderItem");
 		return resultList;
+	}
+	
+	public void updateStatusToPurchased(Long orderId) {
+		orderItemRepository.updateStatusToPurchased(orderId);
 	}
 	
 }
