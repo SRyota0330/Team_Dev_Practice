@@ -25,8 +25,8 @@ public class CartService {
 		}
 	}
 	
-	public void delItemFromCart(Order order, Item item) {
-		orderItemRepository.delItemFromCart(order, item);
+	public void delItemFromCart(Order order, Long itemid) {
+		orderItemRepository.delItemFromCart(order.getOrderid(), itemid);
 	}
 	
 	public void editItemOnCart(int quantity) {
@@ -50,4 +50,11 @@ public class CartService {
 		orderItemRepository.updateStatusToPurchased(orderId);
 	}
 	
+	public void changeQuantity(Order order, Long itemid, int delta) {
+		orderItemRepository.changeQuantity(order.getOrderid(), itemid, delta);
+	}
+	
+	public void clearCart(Long orderid) {
+		orderItemRepository.clearCart(orderid);
+	}
 }
