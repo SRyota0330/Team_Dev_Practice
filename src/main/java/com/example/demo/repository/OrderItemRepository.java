@@ -85,7 +85,6 @@ public class OrderItemRepository {
 	        // Order
 	        Order order = new Order();
 	        order.setOrderid(((Number) row.get("o_orderid")).longValue());
-	        order.setStatus((String) row.get("o_status"));
 
 	        // Item
 	        Item item = new Item();

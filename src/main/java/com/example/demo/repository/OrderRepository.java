@@ -36,7 +36,6 @@ public class OrderRepository {
 		
 		order.setOrderid(((Number) resultMap.get("orderid")).longValue());
 		System.out.println(order.getOrderid());
-		order.setStatus((String)resultMap.get("status"));
 
 		
 		List<OrderItem> orderItemList = orderItemRepository.getAllItems(order.getOrderid());
