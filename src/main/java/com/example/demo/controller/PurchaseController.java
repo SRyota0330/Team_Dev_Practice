@@ -52,9 +52,6 @@ public class PurchaseController {
 		model.addAttribute("address", address);
 		return "purchase/cashRegister";
 	}
-	//カートの中身個数を調整するメソッド
-
-	//カートから削除するメソッド
 	
 	//購入確定ボタン
 	@PostMapping(value="/confirm")
@@ -79,7 +76,11 @@ public class PurchaseController {
 			stockService.manageCount(reststock, oi.getItem()); //StockServiceのmanageCountメソッドに渡す
 		}
 		
-		cartService.updateStatusToPurchased(order.getOrderid()); //該当のOrderidの商品のステータスを"purchased"に変更
+		//該当のOrderidの商品のステータスを"purchased"に変更
+		cartService.updateStatusToPurchased(order.getOrderid());
+		
+		//カートの中身を削除
+		cartService.clearCart(order.getOrderid());
 		
 		//購入完了ページに遷移
 		return "purchase/purchased";

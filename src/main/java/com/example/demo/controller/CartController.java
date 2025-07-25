@@ -33,15 +33,18 @@ public class CartController {
 	@GetMapping("/cart")
 	public String cart(Model model, HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
-		if(userid != null) {
-			Order loggedUserOrder = orderService.getOrderFromUser(userid);
-			Long orderId = orderService.getOrderId(loggedUserOrder);
-			List<OrderItem> orderItem = cartService.getAllItems(orderId);
-			model.addAttribute("itemList", cartService.getItemFromOrderItem(orderItem));
-			return "purchase/cartList";
-		}else {
-			return "redirect:/user/login";
-		}
+		Order order = userService.userDetail(userid).getOrder();
+		List<OrderItem> orderItems = cartService.getAllItems(order.getOrderid());
+		model.addAttribute("itemList", orderItems);
+//		if(userid != null) {
+//			Order loggedUserOrder = orderService.getOrderFromUser(userid);
+//			Long orderId = orderService.getOrderId(loggedUserOrder);
+//			List<OrderItem> orderItem = cartService.getAllItems(orderId);
+//			model.addAttribute("itemList", cartService.getItemFromOrderItem(orderItem));
+		return "purchase/cartList";
+//		}else {
+//			return "redirect:/user/login";
+//		}
 	}
 	
 	@PostMapping("/cart/add")
@@ -63,5 +66,29 @@ public class CartController {
 		}else {
 			return "redirect:/login";
 		}
+	}
+	
+	@PostMapping("/cart/increase")
+	public String increaseItem(@RequestParam Long itemid, HttpSession session) {
+		Long userid = (Long) session.getAttribute("userid");
+		Order order = userService.userDetail(userid).getOrder();
+		cartService.changeQuantity(order, itemid, +1);
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/cart/decrease")
+	public String decreaseItem(@RequestParam Long itemid, HttpSession session) {
+		Long userid = (Long) session.getAttribute("userid");
+		Order order = userService.userDetail(userid).getOrder();
+		cartService.changeQuantity(order, itemid, -1);
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/cart/delete")
+	public String delItemFromCart(@RequestParam Long itemid, HttpSession session) {
+		Long userid = (Long) session.getAttribute("userid");
+		Order order = userService.userDetail(userid).getOrder();
+		cartService.delItemFromCart(order, itemid);
+		return "redirect:/cart";
 	}
 }
