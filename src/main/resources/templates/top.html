@@ -61,17 +61,26 @@
       </header>
 
       <!-- 商品一覧 -->
-      <section class="product-list">
-<!--        <p th:text="${message}"></p>-->
-        <div th:each="item : ${items}">
-          <a class="product-link" th:href="@{/item/{id}(id=${item.itemid})}">
-            <div class="product-card">
-              <img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
-              <p th:text="${item.name}">商品名</p>
-              <p th:text="${item.price + '円'}">価格</p>
-            </div>
-          </a>
-        </div>
+	<section class="product-list">
+		<!--        <p th:text="${message}"></p>-->
+		<div th:each="item : ${items}">
+			<!-- 在庫がある場合はリンク付き -->
+			<a th:if="${item.stock.count > 0}" class="product-link" th:href="@{/item/{id}(id=${item.itemid})}">
+				<div class="product-card">
+					<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
+					<p th:text="${item.name}">商品名</p>
+					<p th:text="${item.price + '円'}">価格</p>
+				</div>
+			</a>
+	
+			<!-- 在庫がない場合はリンクなし -->
+			<div th:if="${item.stock.count == 0}" class="product-card product-card-disabled">
+				<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
+				<p th:text="${item.name}">商品名</p>
+				<p th:text="${item.price + '円'}">価格</p>
+				<p style="color: red;">在庫切れ</p>
+			</div>
+		</div>
         <p th:text="${itemListSize + '件'}"></p>
       </section>
 

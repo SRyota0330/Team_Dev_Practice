@@ -1,24 +1,57 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-
-
 <head>
-	<meta charset="UTF-8" />
-	<title>Shinano</title>
-<!--	<link rel="stylesheet" th:href="@{/css/top.css}" />-->
+  <meta charset="UTF-8" />
+  <title>Shinano - 購入完了</title>
+  <link rel="stylesheet" th:href="@{/css/purchased.css}" href="/css/purchased.css" />
 </head>
 
-
 <body>
-	<h2>Thank You!!!</h2>
-	<div class="container">
-		<aside class="sidebar">
-			<a th:href="@{/}">
-				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
-			</a>
-		</aside>		
-	</div>
+  <div class="container">
+    <!-- サイドバー -->
+    <aside class="sidebar">
+      <a th:href="@{/}">
+        <img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
+      </a>
+    </aside>
+
+    <!-- メイン -->
+    <main class="main-content">
+      <div class="thank-you-card">
+        <!-- チェックマーク（SVG） -->
+        <div class="check-icon">✔</div>
+        <h2>Thank You!!!</h2>
+        <p>ご購入ありがとうございます。</p>
+        <p>商品は準備ができ次第、発送いたします。</p>
+        <a href="/" class="button">トップページへ戻る</a>
+      </div>
+    </main>
+  </div>
 </body>
-
-
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ja" xmlns:th="http://www.thymeleaf.org">-->
+
+
+<!--<head>-->
+<!--	<meta charset="UTF-8" />-->
+<!--	<title>Shinano</title>-->
+<!--	<link rel="stylesheet" th:href="@{/css/top.css}" />-->
+<!--</head>-->
+
+
+<!--<body>-->
+<!--	<h2>Thank You!!!</h2>-->
+<!--	<div class="container">-->
+<!--		<aside class="sidebar">-->
+<!--			<a th:href="@{/}">-->
+<!--				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />-->
+<!--			</a>-->
+<!--		</aside>		-->
+<!--	</div>-->
+<!--</body>-->
+
+
+<!--</html>-->
