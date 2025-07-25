@@ -41,9 +41,9 @@ public class OrderItemRepository {
 		jdbcTemplate.update(query, quantity, order.getOrderid(), item.getItemid());
 	}
 	
-	public void delItemFromCart(Order order, Item item) {
-		String query = "DELETE FROM orderitem (order_id, item_id) VALUES (?, ?)";
-		jdbcTemplate.update(query, order, item);
+	public void delItemFromCart(Long orderid, Long itemid) {
+		String query = "DELETE FROM orderitem WHERE order_id = ? AND item_id = ?";
+		jdbcTemplate.update(query, orderid, itemid);
 	}
 	
 	public void editItemOnCart(int quantity) {
@@ -123,5 +123,15 @@ public class OrderItemRepository {
 	public void updateStatusToPurchased(Long orderId) {
 		String query = "UPDATE orderitem SET status = 'purchased' WHERE order_id = ?";
 		jdbcTemplate.update(query, orderId);
+	}
+	
+	public void changeQuantity(Long orderid, Long itemid, int delta) {
+		String query = "UPDATE orderitem SET quantity = quantity + ? WHERE order_id = ? AND item_id = ?";
+		jdbcTemplate.update(query, delta, orderid, itemid);
+	}
+	
+	public void clearCart(Long orderid) {
+		String query = "DELETE FROM orderitem WHERE order_id = ?";
+		jdbcTemplate.update(query, orderid);
 	}
 }

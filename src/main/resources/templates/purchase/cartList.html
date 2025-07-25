@@ -15,13 +15,25 @@
 				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
 			</a>
 		</aside>	
-
-		<input type="text" placeholder="検索バー">
 		
-		<div class="card" th:each="item :${itemList}">
-			<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image">
-			<p th:text="${item.name}">商品名</p>
-			<p th:text="${item.price} + '円'">価格</p>
+		<div class="card" th:each="orderItem : ${itemList}">
+			<img th:src="@{${orderItem.item.picturelink}}" alt="商品画像" class="product-image">
+			<p th:text="${orderItem.item.name}">商品名</p>
+			<p th:text="${orderItem.item.price} + '円'">価格</p>
+			<p th:text="'数量：' + ${orderItem.quantity}">数量</p>
+			
+			<form th:action="@{/cart/increase}" method="post">
+				<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
+				<button type="submit">+</button>
+			</form>
+			<form th:action="@{/cart/decrease}" method="post">
+				<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
+				<button type="submit">-</button>
+			</form>	
+			<form th:action="@{/cart/delete}" method="post">
+				<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
+				<button type="submit">🗑</button>
+			</form>	
 		</div>
 
 		<a th:href="@{checkout}">
