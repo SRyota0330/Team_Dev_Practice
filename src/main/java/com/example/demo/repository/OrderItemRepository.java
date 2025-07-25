@@ -24,8 +24,8 @@ public class OrderItemRepository {
 	
 
 	public void addItemToCart(Order order, Item item, int quantity) {
-		String query = "INSERT INTO orderitem (order_id, item_id, quantity) VALUES (?, ?, ?)";
-		jdbcTemplate.update(query, order.getOrderid(), item.getItemid(), quantity);
+		String query = "INSERT INTO orderitem (order_id, item_id, quantity, status) VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(query, order.getOrderid(), item.getItemid(), quantity, "cart");
 
 	}
 	
@@ -71,7 +71,7 @@ public class OrderItemRepository {
 	    String query =
 	        "SELECT " +
 	        "oi.orderitemid, oi.quantity, " +
-	        "o.orderid AS o_orderid, o.status AS o_status, " +
+	        "o.orderid AS o_orderid," +
 	        "i.itemid AS i_itemid, i.name AS i_name, i.price AS i_price, " +
 	        "i.picturelink AS i_picturelink, i.detail AS i_detail, i.genre AS i_genre " +
 	        "FROM orderitem oi " +

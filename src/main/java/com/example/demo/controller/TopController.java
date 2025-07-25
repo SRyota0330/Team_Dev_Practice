@@ -1,6 +1,127 @@
+//package com.example.demo.controller;
+//
+//import java.util.List;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.RequestParam;
+//
+//import com.example.demo.entity.Item;
+//import com.example.demo.service.ItemService;
+//
+//@Controller
+//public class TopController {
+//    @Autowired
+//    private ItemService itemService;
+//    
+//    @GetMapping(value="/")
+//    public String top(Model model) {
+//    	model.addAttribute("message", "全ての商品");
+//		List<Item> allItemList = itemService.getAllItem();
+//		
+////		List<Item> checkedItemList = new ArrayList<Item>();
+////		
+////		for(Item checkedItem : allItemList) {
+////			
+////			Stock stock = checkedItem.getStock();
+////			
+////			if(stock.getCount() == 0) {
+////				String soldItemName = checkedItem.getName();
+////				soldItemName = "[品切れ中]" + soldItemName;
+////				checkedItem.setName(soldItemName);
+////				
+////				checkedItemList.add(checkedItem);
+////			}else {
+////				checkedItemList.add(checkedItem);
+////			}
+////		}
+////		allItemList = checkedItemList;
+//		
+//		itemService.checkStock(allItemList);
+//		
+//		model.addAttribute("items", allItemList);
+//		model.addAttribute("itemListSize", allItemList.size());
+//		model.addAttribute("keywords", "");
+//		model.addAttribute("genres", List.of("ワイン","ビール","ウイスキー","果実酒","日本酒"));
+//		
+//		return "top";
+//    }
+//    
+//
+//        @GetMapping(value={"/category/{genre}"})
+//        public String listByGenre(
+//                @PathVariable(value="genre", required=false) String genre,
+//                Model model) {
+//
+//            List<Item> itemList;
+//            if (genre == null || genre.isBlank()) {
+//                itemList = itemService.getAllItem();
+//            } else {
+//                itemList = itemService.searchItemFromGenre(genre);
+//            }
+//            
+//            itemList = itemService.checkStock(itemList);
+//
+//            model.addAttribute("message", genre+"ジャンルの商品を表示中");
+//            model.addAttribute("items", itemList);
+//            model.addAttribute("itemListSize", itemList.size());
+//            model.addAttribute("selectedGenre", genre);
+//            model.addAttribute("keywords", genre);
+//            model.addAttribute("genres", List.of("ワイン","ビール","ウイスキー","果実酒","日本酒"));
+//            return "top";
+//        }
+//
+//    
+//    
+//	//検索結果一覧
+//	@GetMapping(value="/search")
+//	public String search(@RequestParam(name = "keywords", required = false) String keywords, Model model) {
+//		if(keywords == null || keywords.isBlank()) {
+//			model.addAttribute("message", "全ての商品");
+//			List<Item> allItemList = itemService.getAllItem();
+//			allItemList = itemService.checkStock(allItemList);
+//			model.addAttribute("items", allItemList);
+//			model.addAttribute("itemListSize", allItemList.size());
+//			model.addAttribute("keywords", "");
+//		}else {
+//			List<Item> itemList = itemService.searchItemFromName(keywords);
+//			if(itemList.isEmpty()) {
+//				model.addAttribute("message", "検索結果はありません");
+//				List<Item> allItemList = itemService.getAllItem();
+//				allItemList = itemService.checkStock(allItemList);
+//				model.addAttribute("items", allItemList);
+//				model.addAttribute("itemListSize", "全件表示中");
+//				model.addAttribute("keywords", keywords);
+//			}else {
+//				itemList = itemService.checkStock(itemList);
+//				model.addAttribute("message", keywords+"の検索結果です");
+//				model.addAttribute("itemListSize", itemList.size());
+//				model.addAttribute("items", itemList);
+//				model.addAttribute("keywords", keywords);
+//			}
+//		}
+//		
+//		 model.addAttribute("genres", List.of("ワイン","ビール","ウイスキー","果実酒","日本酒"));
+//		 
+//		return "top";
+//	}
+//	
+//	//商品詳細ページに遷移
+//	@GetMapping(value="/item/{id}")
+//	public String detail(@PathVariable("id") Long id, Model model) {
+//		Item item = itemService.itemDetail(id);
+//		model.addAttribute("item", item);
+//		return "purchase/itemDetail";
+//	}
+//}
 package com.example.demo.controller;
 
 import java.util.List;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,110 +131,103 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Item;
+import com.example.demo.entity.User;
 import com.example.demo.service.ItemService;
+import com.example.demo.service.UserService;
 
 @Controller
 public class TopController {
+
     @Autowired
     private ItemService itemService;
-    
-    @GetMapping(value="/")
-    public String top(Model model) {
-    	model.addAttribute("message", "全ての商品");
-		List<Item> allItemList = itemService.getAllItem();
-		
-//		List<Item> checkedItemList = new ArrayList<Item>();
-//		
-//		for(Item checkedItem : allItemList) {
-//			
-//			Stock stock = checkedItem.getStock();
-//			
-//			if(stock.getCount() == 0) {
-//				String soldItemName = checkedItem.getName();
-//				soldItemName = "[品切れ中]" + soldItemName;
-//				checkedItem.setName(soldItemName);
-//				
-//				checkedItemList.add(checkedItem);
-//			}else {
-//				checkedItemList.add(checkedItem);
-//			}
-//		}
-//		allItemList = checkedItemList;
-		
-		itemService.checkStock(allItemList);
-		
-		model.addAttribute("items", allItemList);
-		model.addAttribute("itemListSize", allItemList.size());
-		model.addAttribute("keywords", "");
-		model.addAttribute("genres", List.of("ワイン","ビール","ウイスキー","果実酒","日本酒"));
-		
-		return "top";
+
+    @Autowired
+    private UserService userService;
+
+    // ログイン状態を設定する共通処理
+    private void setLoginStatus(HttpSession session, Model model) {
+        Long userid = (Long) session.getAttribute("userid");
+        if (userid != null) {
+            model.addAttribute("isLoggedIn", true);
+            User user = userService.userDetail(userid);
+            model.addAttribute("you", user);
+        } else {
+            model.addAttribute("isLoggedIn", false);
+            model.addAttribute("you", null);
+        }
     }
-    
 
-        @GetMapping(value={"/category/{genre}"})
-        public String listByGenre(
-                @PathVariable(value="genre", required=false) String genre,
-                Model model) {
+    @GetMapping(value = "/")
+    public String top(HttpSession session, Model model) {
+        setLoginStatus(session, model);
 
-            List<Item> itemList;
-            if (genre == null || genre.isBlank()) {
-                itemList = itemService.getAllItem();
+        List<Item> allItemList = itemService.getAllItem();
+        itemService.checkStock(allItemList);
+        model.addAttribute("message", "全ての商品");
+        model.addAttribute("items", allItemList);
+        model.addAttribute("itemListSize", allItemList.size());
+        model.addAttribute("keywords", "");
+        model.addAttribute("genres", List.of("ワイン", "ビール", "ウイスキー", "果実酒", "日本酒"));
+
+        return "top";
+    }
+
+    @GetMapping(value = "/category/{genre}")
+    public String listByGenre(@PathVariable(value = "genre") String genre, HttpSession session, Model model) {
+        setLoginStatus(session, model);
+
+        List<Item> itemList = itemService.searchItemFromGenre(genre);
+        itemList = itemService.checkStock(itemList);
+
+        model.addAttribute("message", genre + "ジャンルの商品を表示中");
+        model.addAttribute("items", itemList);
+        model.addAttribute("itemListSize", itemList.size());
+        model.addAttribute("selectedGenre", genre);
+        model.addAttribute("keywords", genre);
+        model.addAttribute("genres", List.of("ワイン", "ビール", "ウイスキー", "果実酒", "日本酒"));
+
+        return "top";
+    }
+
+    @GetMapping(value = "/search")
+    public String search(@RequestParam(name = "keywords", required = false) String keywords, HttpSession session, Model model) {
+        setLoginStatus(session, model);
+
+        if (keywords == null || keywords.isBlank()) {
+            model.addAttribute("message", "全ての商品");
+            List<Item> allItemList = itemService.getAllItem();
+            allItemList = itemService.checkStock(allItemList);
+            model.addAttribute("items", allItemList);
+            model.addAttribute("itemListSize", allItemList.size());
+            model.addAttribute("keywords", "");
+        } else {
+            List<Item> itemList = itemService.searchItemFromName(keywords);
+            if (itemList.isEmpty()) {
+                model.addAttribute("message", "検索結果はありません");
+                List<Item> allItemList = itemService.getAllItem();
+                allItemList = itemService.checkStock(allItemList);
+                model.addAttribute("items", allItemList);
+                model.addAttribute("itemListSize", "全件表示中");
             } else {
-                itemList = itemService.searchItemFromGenre(genre);
+                itemList = itemService.checkStock(itemList);
+                model.addAttribute("message", keywords + "の検索結果です");
+                model.addAttribute("items", itemList);
+                model.addAttribute("itemListSize", itemList.size());
             }
-            
-            itemList = itemService.checkStock(itemList);
-
-            model.addAttribute("message", genre+"ジャンルの商品を表示中");
-            model.addAttribute("items", itemList);
-            model.addAttribute("itemListSize", itemList.size());
-            model.addAttribute("selectedGenre", genre);
-            model.addAttribute("keywords", genre);
-            model.addAttribute("genres", List.of("ワイン","ビール","ウイスキー","果実酒","日本酒"));
-            return "top";
+            model.addAttribute("keywords", keywords);
         }
 
-    
-    
-	//検索結果一覧
-	@GetMapping(value="/search")
-	public String search(@RequestParam(name = "keywords", required = false) String keywords, Model model) {
-		if(keywords == null || keywords.isBlank()) {
-			model.addAttribute("message", "全ての商品");
-			List<Item> allItemList = itemService.getAllItem();
-			allItemList = itemService.checkStock(allItemList);
-			model.addAttribute("items", allItemList);
-			model.addAttribute("itemListSize", allItemList.size());
-			model.addAttribute("keywords", "");
-		}else {
-			List<Item> itemList = itemService.searchItemFromName(keywords);
-			if(itemList.isEmpty()) {
-				model.addAttribute("message", "検索結果はありません");
-				List<Item> allItemList = itemService.getAllItem();
-				allItemList = itemService.checkStock(allItemList);
-				model.addAttribute("items", allItemList);
-				model.addAttribute("itemListSize", "全件表示中");
-				model.addAttribute("keywords", keywords);
-			}else {
-				itemList = itemService.checkStock(itemList);
-				model.addAttribute("message", keywords+"の検索結果です");
-				model.addAttribute("itemListSize", itemList.size());
-				model.addAttribute("items", itemList);
-				model.addAttribute("keywords", keywords);
-			}
-		}
-		
-		 model.addAttribute("genres", List.of("ワイン","ビール","ウイスキー","果実酒","日本酒"));
-		 
-		return "top";
-	}
-	
-	//商品詳細ページに遷移
-	@GetMapping(value="/item/{id}")
-	public String detail(@PathVariable("id") Long id, Model model) {
-		Item item = itemService.itemDetail(id);
-		model.addAttribute("item", item);
-		return "purchase/itemDetail";
-	}
+        model.addAttribute("genres", List.of("ワイン", "ビール", "ウイスキー", "果実酒", "日本酒"));
+        return "top";
+    }
+
+    @GetMapping(value = "/item/{id}")
+    public String detail(@PathVariable("id") Long id, HttpSession session, Model model) {
+        setLoginStatus(session, model);
+
+        Item item = itemService.itemDetail(id);
+        model.addAttribute("item", item);
+
+        return "purchase/itemDetail";
+    }
 }
