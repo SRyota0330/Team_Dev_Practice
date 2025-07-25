@@ -111,6 +111,7 @@ public class ManageController {
 				itemService.addItem(item);
 				stockService.addCount(0, itemService.recentlyItem());
 				model.addAttribute("allItem", itemService.getAllItem());
+				model.addAttribute("allUser", userService.getAllUser());
 				return "admin/manageItemsAndUsers";
 			} catch (Exception e) {
 				e.printStackTrace();
