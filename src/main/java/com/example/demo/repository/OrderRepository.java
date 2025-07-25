@@ -47,8 +47,8 @@ public class OrderRepository {
 	}
 	
 	public void addRecord(Long userid) {
-		String query = "INSERT INTO orders (user_id, status) VALUES(?, ?)";
-		jdbcTemplate.update(query, userid, "cart");
+		String query = "INSERT INTO orders (user_id) VALUES(?)";
+		jdbcTemplate.update(query, userid);
 	}
 	
 

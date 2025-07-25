@@ -23,8 +23,10 @@
 		<div th:each="item : ${itemList}">
 			<p th:text="${item.name}"></p>
 			<p th:text="${item.price}"></p>
-		</div>	
-		<button class="button">購入を確定する</button>
+		</div>
+		<form th:action="@{confirm}" method="post">	
+			<button type="submit" class="button">購入を確定する</button>
+		</form>	
 	</div>
 </body>
 
