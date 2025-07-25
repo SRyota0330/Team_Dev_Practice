@@ -21,12 +21,13 @@ body, html {
   box-shadow: 0 0 12px rgba(0,0,0,0.08);
 }
 
-/* 上部ボタン群 */
+/* 上部ボタン群（ログアウト、管理者画面に戻る） */
 .top-buttons {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end;  /* 右寄せ */
   gap: 10px;
   margin-bottom: 30px;
+  margin-top: -10px;
 }
 
 /* ラベル */
@@ -41,7 +42,11 @@ label {
 /* 入力欄 */
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+select,
+textarea,
+input[type="file"] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -50,6 +55,11 @@ input[type="password"] {
   box-sizing: border-box;
   font-family: inherit;
   margin-bottom: 16px;
+  resize: vertical;
+}
+
+textarea {
+  min-height: 80px;
 }
 
 /* ボタン共通 */
@@ -70,7 +80,7 @@ input[type="password"] {
   background-color: #7a5f41;
 }
 
-/* 危険ボタン */
+/* 危険ボタン（ログアウト用など） */
 .button.danger {
   background-color: darkred;
 }
@@ -78,33 +88,68 @@ input[type="password"] {
 .button.danger:hover {
   background-color: #a00000;
 }
-/*body {*/
-/*  font-family: "Hiragino Kaku Gothic ProN", sans-serif;*/
-/*  background-color: #f9f5f1;*/
+/* 上部ボタン群 */
+.top-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+/* 全体背景・フォント */
+/*body, html {*/
 /*  margin: 0;*/
-/*  padding: 0;*/
+/*  padding: 40px 20px;*/
+/*  font-family: "Hiragino Kaku Gothic ProN", sans-serif;*/
+/*  background: linear-gradient(#d5c8b3, #f2e2cc);*/
+/*  min-height: 100vh;*/
+/*  color: #333;*/
+/*  box-sizing: border-box;*/
+/*  text-align: center;*/
 /*}*/
 
-/*.container {*/
+/* コンテンツ中央寄せ */
+/*.main-wrapper {*/
 /*  max-width: 600px;*/
-/*  margin: 50px auto;*/
+/*  margin: 0 auto;*/
+/*  text-align: left;*/
+/*  background-color: white;*/
 /*  padding: 30px;*/
-/*  background-color: #fff;*/
 /*  border-radius: 12px;*/
-/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);*/
+/*  box-shadow: 0 0 12px rgba(0,0,0,0.08);*/
 /*}*/
 
+/* 上部ボタン群 */
+/*.top-buttons {*/
+/*  display: flex;*/
+/*  justify-content: flex-end;*/
+/*  gap: 10px;*/
+/*  margin-bottom: 30px;*/
+/*}*/
+
+/* ラベル */
+/*label {*/
+/*  font-weight: bold;*/
+/*  display: block;*/
+/*  margin-top: 12px;*/
+/*  margin-bottom: 6px;*/
+/*  font-size: 16px;*/
+/*}*/
+
+/* 入力欄 */
 /*input[type="text"],*/
 /*input[type="email"],*/
 /*input[type="password"] {*/
 /*  width: 100%;*/
 /*  padding: 10px;*/
-/*  margin: 12px 0;*/
 /*  font-size: 16px;*/
 /*  border: 1px solid #ccc;*/
 /*  border-radius: 6px;*/
+/*  box-sizing: border-box;*/
+/*  font-family: inherit;*/
+/*  margin-bottom: 16px;*/
 /*}*/
 
+/* ボタン共通 */
 /*.button {*/
 /*  background-color: #5b4425;*/
 /*  color: white;*/
@@ -112,10 +157,21 @@ input[type="password"] {
 /*  border: none;*/
 /*  border-radius: 6px;*/
 /*  font-size: 16px;*/
-/*  margin-right: 10px;*/
 /*  cursor: pointer;*/
+/*  transition: background-color 0.3s;*/
+/*  display: inline-block;*/
+/*  margin-top: 10px;*/
 /*}*/
 
-/*.button[style*="darkred"] {*/
+/*.button:hover {*/
+/*  background-color: #7a5f41;*/
+/*}*/
+
+/* 危険ボタン */
+/*.button.danger {*/
 /*  background-color: darkred;*/
+/*}*/
+
+/*.button.danger:hover {*/
+/*  background-color: #a00000;*/
 /*}*/
