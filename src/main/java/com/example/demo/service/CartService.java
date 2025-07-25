@@ -18,7 +18,12 @@ public class CartService {
 	OrderItemRepository orderItemRepository;
 	
 	public void addItemToCart(Order order, Item item, int quantity) {
-		orderItemRepository.addItemToCart(order, item, quantity);
+		
+		if(orderItemRepository.idCheck(item.getItemid(),order.getOrderid())==true) {
+			orderItemRepository.updateQuantityOfCart(order, item, quantity);
+		}else {
+			orderItemRepository.addItemToCart(order, item, quantity);
+		}
 	}
 	
 	public void delItemFromCart(Order order, Item item) {
