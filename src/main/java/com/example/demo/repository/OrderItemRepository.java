@@ -21,8 +21,6 @@ public class OrderItemRepository {
 	OrderItemRepository(JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-
 	public boolean idCheck(Long itemid, Long orderid) {
 		String query = "SELECT * FROM orderitem WHERE item_id = ? AND order_id = ?";
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,itemid,orderid);

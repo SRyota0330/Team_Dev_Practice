@@ -24,7 +24,7 @@
 				<input type="hidden" name="itemid" th:value="${item.itemid}" />
 					<label for="quantity">個数：</label>
 					<select name="quantity" id="quantity">
-						<option th:each="i : ${#numbers.sequence(1,10)}" 
+						<option th:each="i : ${#numbers.sequence(1,stock)}" 
 								th:value="${i}" 
 								th:text="${i}">
 						</option>
