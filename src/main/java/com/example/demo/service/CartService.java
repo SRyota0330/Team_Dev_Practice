@@ -18,7 +18,6 @@ public class CartService {
 	OrderItemRepository orderItemRepository;
 	
 	public void addItemToCart(Order order, Item item, int quantity) {
-		
 		if(orderItemRepository.idCheck(item.getItemid(),order.getOrderid())==true) {
 			orderItemRepository.updateQuantityOfCart(order, item, quantity);
 		}else {
@@ -45,6 +44,10 @@ public class CartService {
 		}
 		System.out.println(resultList+"getItemFromOrderItem");
 		return resultList;
+	}
+	
+	public void updateStatusToPurchased(Long orderId) {
+		orderItemRepository.updateStatusToPurchased(orderId);
 	}
 	
 }

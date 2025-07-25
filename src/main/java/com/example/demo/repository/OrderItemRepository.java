@@ -21,8 +21,6 @@ public class OrderItemRepository {
 	OrderItemRepository(JdbcTemplate jdbcTemplate){
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	
 	public boolean idCheck(Long itemid, Long orderid) {
 		String query = "SELECT * FROM orderitem WHERE item_id = ? AND order_id = ?";
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,itemid,orderid);
@@ -121,6 +119,9 @@ public class OrderItemRepository {
 
 	    return allItemsList;
 	}
-
 	
+	public void updateStatusToPurchased(Long orderId) {
+		String query = "UPDATE orderitem SET status = 'purchased' WHERE order_id = ?";
+		jdbcTemplate.update(query, orderId);
+	}
 }

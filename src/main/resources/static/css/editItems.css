@@ -78,3 +78,11 @@ input[type="password"] {
 .button.danger:hover {
   background-color: #a00000;
 }
+
+/* 上部ボタン群 */
+.top-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
