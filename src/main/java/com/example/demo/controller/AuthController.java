@@ -18,6 +18,8 @@ import com.example.demo.service.UserService;
 @Controller
 public class AuthController {
 	
+	//test0724
+	
 	@Autowired
 	UserService userService;
 	
@@ -56,7 +58,7 @@ public class AuthController {
 		    	model.addAttribute("mail", "セッション情報⇒" + userid);
 		        System.out.println("ユーザーのメールアドレス: " + userid);
 		        model.addAttribute("you", verifiedUser);
-		        return "top";
+		        return "redirect:/";
 		        
 		    }
 		    // セッションに 'userid' が存在するか確認
