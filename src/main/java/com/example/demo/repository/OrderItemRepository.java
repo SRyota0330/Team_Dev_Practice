@@ -31,6 +31,17 @@ public class OrderItemRepository {
 		}
 	}
 	
+	
+	public boolean idCheck(Long itemid, Long orderid) {
+		String query = "SELECT * FROM orderitem WHERE item_id = ? AND order_id = ?";
+		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,itemid,orderid);
+		if(searchResultList.isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
 	public void addItemToCart(Order order, Item item, int quantity) {
 		String query = "INSERT INTO orderitem (order_id, item_id, quantity, status) VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(query, order.getOrderid(), item.getItemid(), quantity, "cart");

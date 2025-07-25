@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Item;
+import com.example.demo.entity.Stock;
 
 @Repository
 public class StockRepository {
@@ -29,6 +30,18 @@ public class StockRepository {
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,itemid);
 		Map<String, Object> resultMap = searchResultList.get(0);
 		return (int)resultMap.get("count");
+	}
+	
+	public Stock getStock(Long itemid) {
+		String query = "SELECT * FROM stock WHERE item_id = ? LIMIT 1";
+		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,itemid);
+		Map<String, Object> resultMap = searchResultList.get(0);
+		Stock stock = new Stock();
+		stock.setCount((int)resultMap.get("count"));
+		stock.setItem((Item)resultMap.get("item"));
+		stock.setStockid((Long)resultMap.get("stockid"));
+		
+		return stock;
 	}
 }
 
