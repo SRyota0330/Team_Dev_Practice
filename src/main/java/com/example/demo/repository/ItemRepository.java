@@ -53,6 +53,7 @@ public class ItemRepository {
 //			stock.setItem((Item)item);
 			stock.setStockid((Long)resultMap.get("stockid"));
 			
+			//itemにストック型をセット
 			item.setStock(stock);
 			
 			
@@ -64,7 +65,10 @@ public class ItemRepository {
 	public List<Item> searchItemFromGenre(String genre){
 		List<Item> allItemList = new ArrayList<Item>();
 		
-		String query = "SELECT * FROM item WHERE genre = ?";
+		String query = "SELECT *\r\n"
+				+ "FROM item\r\n"
+				+ "INNER JOIN stock ON item.itemid = stock.item_id\r\n"
+				+ "WHERE item.genre = ?";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,genre);
 		
@@ -78,6 +82,14 @@ public class ItemRepository {
 			item.setDetail((String)resultMap.get("detail"));
 			item.setGenre((String)resultMap.get("genre"));
 			
+			Stock stock = new Stock();
+			stock.setCount((int)resultMap.get("count"));
+//			stock.setItem((Item)item);
+			stock.setStockid((Long)resultMap.get("stockid"));
+			
+			//itemにストック型をセット
+			item.setStock(stock);
+			
 			allItemList.add(item);
 		}
 		return allItemList;
@@ -86,7 +98,8 @@ public class ItemRepository {
 	public List<Item> searchItemFromName(String name){
 		List<Item> allItemList = new ArrayList<Item>();
 		
-		String query = "SELECT * FROM item WHERE name LIKE ?";
+		String query = "SELECT * FROM item INNER JOIN stock on item.itemid = stock.item_id WHERE name LIKE ?";
+		
 		String keywords = "%" + name + "%";
 		
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,keywords);
@@ -100,6 +113,15 @@ public class ItemRepository {
 			item.setPicturelink((String)resultMap.get("picturelink"));
 			item.setDetail((String)resultMap.get("detail"));
 			item.setGenre((String)resultMap.get("genre"));
+			
+			Stock stock = new Stock();
+			stock.setCount((int)resultMap.get("count"));
+//			stock.setItem((Item)item);
+			stock.setStockid((Long)resultMap.get("stockid"));
+			
+			//itemにストック型をセット
+			item.setStock(stock);
+
 			
 			allItemList.add(item);
 		}
@@ -141,5 +163,7 @@ public class ItemRepository {
 			
 		return item;
 	}
+	
+	
 
 }
