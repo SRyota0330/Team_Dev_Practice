@@ -235,5 +235,8 @@ public class TopController {
         model.addAttribute("stock", stock);
 
         return "purchase/itemDetail";
+ 
+        }
     }
-}
+
+    

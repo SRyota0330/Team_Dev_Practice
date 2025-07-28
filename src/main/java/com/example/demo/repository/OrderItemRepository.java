@@ -22,7 +22,7 @@ public class OrderItemRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	public boolean idCheck(Long itemid, Long orderid) {
-		String query = "SELECT * FROM orderitem WHERE item_id = ? AND order_id = ?";
+		String query = "SELECT * FROM orderitem WHERE item_id = ? AND order_id = ? AND status = 'cart'";
 		List<Map<String, Object>> searchResultList = jdbcTemplate.queryForList(query,itemid,orderid);
 		if(searchResultList.isEmpty()) {
 			return false;
@@ -78,18 +78,21 @@ public class OrderItemRepository {
 //		return allItemsList;
 //	}
 	public List<OrderItem> getAllItems(Long orderId) {
+		
+		System.out.println("OrderItemRepositoryのげっとおーるあいてむ使われたよん！");
+		
 	    List<OrderItem> allItemsList = new ArrayList<>();
 
 	    String query =
-	        "SELECT " +
-	        "oi.orderitemid, oi.quantity, " +
-	        "o.orderid AS o_orderid," +
-	        "i.itemid AS i_itemid, i.name AS i_name, i.price AS i_price, " +
-	        "i.picturelink AS i_picturelink, i.detail AS i_detail, i.genre AS i_genre " +
-	        "FROM orderitem oi " +
-	        "JOIN orders o ON oi.order_id = o.orderid " +
-	        "JOIN item i ON oi.item_id = i.itemid " +
-	        "WHERE oi.order_id = ?";
+	    	    "SELECT " +
+	    	    "oi.orderitemid, oi.quantity, oi.status, " +  // ← ここを追加！✨
+	    	    "o.orderid AS o_orderid," +
+	    	    "i.itemid AS i_itemid, i.name AS i_name, i.price AS i_price, " +
+	    	    "i.picturelink AS i_picturelink, i.detail AS i_detail, i.genre AS i_genre " +
+	    	    "FROM orderitem oi " +
+	    	    "JOIN orders o ON oi.order_id = o.orderid " +
+	    	    "JOIN item i ON oi.item_id = i.itemid " +
+	    	    "WHERE oi.order_id = ?";
 
 	    List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query, orderId);
 
@@ -113,6 +116,8 @@ public class OrderItemRepository {
 	        orderItem.setQuantity(((Number) row.get("quantity")).intValue());
 	        orderItem.setOrder(order);
 	        orderItem.setItem(item);
+	        orderItem.setStatus((String)row.get("status"));
+	        System.out.println("オーダーアイテムのステータス取得確認："+orderItem.getStatus());
 
 	        allItemsList.add(orderItem);
 	    }
@@ -133,5 +138,13 @@ public class OrderItemRepository {
 	public void clearCart(Long orderid) {
 		String query = "DELETE FROM orderitem WHERE order_id = ?";
 		jdbcTemplate.update(query, orderid);
+	}
+	
+	public int statusCartItems(Long orderId) {
+		String query = "SELECT * FROM orderitem WHERE order_id = ? AND status = 'cart'";
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query,orderId);
+		Map<String, Object> resultMap = resultList.get(0);
+		int cartAmount = (int)resultMap.get("quantity");
+		return cartAmount;
 	}
 }
