@@ -1,11 +1,4 @@
 /* 全体背景とフォント設定 */
-/*body, html {*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/* font-family: "Hiragino Kaku Gothic ProN", sans-serif;*/
-/*  background: linear-gradient(#d5c8b3, #f2e2cc);*/
-/*  min-height: 100vh;*/
-/*}*/
 body, html {
   margin: 0;
   padding: 0;
@@ -141,11 +134,29 @@ body, html {
   background-color: #7a5f41;
 }
 
-/* ログイン・登録ボタン */
-.auth-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* Cartボタンのデフォルトスタイルを消す */
+.cart-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.cart-button img {
+  display: block;
+  border: none;
+  background: none;
+}
+
+/* カートボタンの配置（画面右上） */
+.cart-button-area {
+  position: absolute;
+  top: 30px;
+  right: 80px;
+  z-index: 1000; /* 必要に応じて前面に */
 }
 
 .auth-button {
