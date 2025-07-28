@@ -1,8 +1,15 @@
 /* 全体背景とフォント設定 */
+/*body, html {*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/* font-family: "Hiragino Kaku Gothic ProN", sans-serif;*/
+/*  background: linear-gradient(#d5c8b3, #f2e2cc);*/
+/*  min-height: 100vh;*/
+/*}*/
 body, html {
   margin: 0;
   padding: 0;
-  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  font-family: 'Noto Serif JP', "Hiragino Kaku Gothic ProN", serif;
   background: linear-gradient(#d5c8b3, #f2e2cc);
   min-height: 100vh;
 }
