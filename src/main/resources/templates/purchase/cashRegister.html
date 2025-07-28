@@ -9,19 +9,22 @@
 
 <body>
 	<div class="container">
+		
 		<aside class="sidebar">
 			<a th:href="@{/}">
 				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
 			</a>
 		</aside>
+		
 		<h2>最終確認</h2>
 		<div class="card">
 			<p th:text="'合計：' + ${total} + '円'"></p>
 			<p th:text="'配送先：' + ${address}"></p>
 		</div>
 		
+		<h3>内訳</h3>
 		<div th:each="item : ${itemList}">
-			<p th:text="${item.name}"></p>
+			<p><strong th:text="${item.name}"></strong></p>
 			<p th:text="${item.price}"></p>
 		</div>
 		<form th:action="@{confirm}" method="post">	

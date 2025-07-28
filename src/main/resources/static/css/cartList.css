@@ -99,3 +99,86 @@ input[type="text"]:focus {
 .button:hover {
   background-color: #7a5f41;
 }
+
+.product-action {
+  display: flex;
+  gap: 8px; /* ボタン同士の間隔 */
+  margin-top: 8px;
+  align-items: center;
+}
+
+.product-action form {
+  margin: 0;
+}
+
+/*.product-action button {*/
+/*  background-color: #5b4425;*/
+/*  color: white;*/
+/*  border: none;*/
+/*  border-radius: 6px;*/
+/*  padding: 6px 12px;*/
+/*  font-size: 16px;*/
+/*  cursor: pointer;*/
+/*  transition: background-color 0.2s ease;*/
+/*  min-width: 36px;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.product-action button:hover {*/
+/*  background-color: #7a5f41;*/
+/*}*/
+
+/* 削除ボタンだけ色変更 */
+/*.product-action form:last-child button {*/
+/*  background-color: rgb(255, 100, 100);*/
+/*}*/
+
+/*.product-action form:last-child button:hover {*/
+/*  background-color: rgb(255, 136, 136);*/
+/*}*/
+
+/*.product-action {*/
+/*  display: flex;*/
+/*  gap: 8px;*/
+/*  margin-top: 8px;*/
+/*  align-items: center;*/
+/*  padding-left: 420px;  ← 右に寄せる */
+/*  font-size: 20px;*/
+/*}*/
+.product-action {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  align-items: center;
+  padding-left: 420px; /* ← 右に寄せる */
+}
+
+.product-action button {
+  background-color: #5b4425;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;         /* 少し小さめに調整 */
+  font-size: 18px;           /* ← フォントを少しだけ小さく */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 40px;           /* 増減・削除ボタンの幅を揃える */
+  height: 40px;              /* 高さも揃えて均等に */
+  text-align: center;
+  line-height: 1;            /* テキスト中央揃え補助 */
+  box-sizing: border-box;
+}
+
+/* ボタンホバー時 */
+.product-action button:hover {
+  background-color: #7a5f41;
+}
+
+/* 削除ボタンだけ色変更 */
+.product-action form:last-child button {
+  background-color: rgb(255, 100, 100);
+}
+
+.product-action form:last-child button:hover {
+  background-color: rgb(255, 136, 136);
+}
