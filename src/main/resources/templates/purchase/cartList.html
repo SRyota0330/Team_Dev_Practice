@@ -5,8 +5,9 @@
 	<meta charset="UTF-8">
 	<title>カート</title>
 	<link rel="stylesheet" th:href="@{/css/cartList.css}">-->
-	
+
 </head>
+
 <body>
 	<div class="container">
 		<h1>カート</h1>
@@ -14,31 +15,41 @@
 			<a th:href="@{/}">
 				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
 			</a>
-		</aside>	
-		
+		</aside>
+
 		<div class="card" th:each="orderItem : ${itemList}">
 			<img th:src="@{${orderItem.item.picturelink}}" alt="商品画像" class="product-image">
-			<p th:text="${orderItem.item.name}">商品名</p>
-			<p th:text="${orderItem.item.price} + '円'">価格</p>
-			<p th:text="'数量：' + ${orderItem.quantity}">数量</p>
+			<div class="product-info">
+				<p><strong th:text="${orderItem.item.name}"></strong></p>
+				<p th:text="'単価：' + ${orderItem.item.price} + '円'">価格</p>
+				<p th:text="'数量：' + ${orderItem.quantity}">数量</p>
+				<p th:text="'小計：' + ${orderItem.item.price * orderItem.quantity} + '円'">小計</p>
+			</div>
 			
-			<form th:action="@{/cart/increase}" method="post">
-				<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
-				<button type="submit">+</button>
-			</form>
-			<form th:action="@{/cart/decrease}" method="post">
-				<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
-				<button type="submit">-</button>
-			</form>	
-			<form th:action="@{/cart/delete}" method="post">
-				<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
-				<button type="submit">🗑</button>
-			</form>	
+			<div class="product-action">
+<!--				増加ボタン-->
+				<form th:action="@{/cart/decrease}" method="post">
+					<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
+					<button type="submit">-</button>
+				</form>
+				
+<!--				減少ボタン-->
+				<form th:action="@{/cart/increase}" method="post">
+					<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
+					<button type="submit">+</button>
+				</form>
+	
+<!--				削除ボタン-->
+				<form th:action="@{/cart/delete}" method="post">
+					<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
+					<button type="submit">🗑</button>
+				</form>
+			</div>	
 		</div>
 
 		<a th:href="@{checkout}">
 			<button class="button">レジに進む</button>
-		</a>	
+		</a>
 	</div>
 </body>
 
