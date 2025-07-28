@@ -35,10 +35,12 @@
 				<button type="submit">🗑</button>
 			</form>	
 		</div>
-
+		
+		<p th:each="lessItem : ${lessItemList}" th:text="${lessItem.name} + 'は在庫不足です'"></p>
 		<a th:href="@{checkout}">
 			<button class="button">レジに進む</button>
-		</a>	
+		</a>
+		<p th:text="${emptyCart}"></p>
 	</div>
 </body>
 
