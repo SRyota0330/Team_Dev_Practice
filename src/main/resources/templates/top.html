@@ -5,7 +5,9 @@
   <meta charset="UTF-8" />
   <title>Shinano</title>
   <link rel="stylesheet" th:href="@{/css/top.css}" />
-</head>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+
+  </head>
 
 <body>
   <h2 th:text="${you != null} ? ${you.mailaddress} : 'ゲスト'">ここに表示</h2>
