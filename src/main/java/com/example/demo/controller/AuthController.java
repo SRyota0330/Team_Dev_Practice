@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,7 +69,15 @@ public class AuthController {
         if (result.hasErrors()) {
             return "user/signup";
         }
-        userService.addUser(user);
+        
+        try {
+            userService.addUser(user);
+        } catch (DataIntegrityViolationException ex) {
+            // メールの重複によるユニーク制約違反
+            model.addAttribute("emailError", "このメールアドレスは既に登録されています。");
+            return "user/signup";
+        }
+
         return "redirect:/login";
     }
 
