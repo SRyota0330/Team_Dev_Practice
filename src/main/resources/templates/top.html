@@ -2,92 +2,107 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Shinano</title>
-  <link rel="stylesheet" th:href="@{/css/top.css}" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
+	<meta charset="UTF-8" />
+	<title>Shinano</title>
+	<link rel="stylesheet" th:href="@{/css/top.css}" />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap" rel="stylesheet">
 
-  </head>
+</head>
 
 <body>
-  <h2 th:text="${you != null} ? ${you.mailaddress} : 'ゲスト'">ここに表示</h2>
+	<h2 th:text="${you != null} ? ${you.mailaddress} : 'ゲスト'">ここに表示</h2>
 
-  <div class="container">
+	<div class="container">
 
-    <!-- サイドバー -->
-    <aside class="sidebar">
-      <a th:href="@{/}">
-        <img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
-      </a>
+		<!-- サイドバー -->
+		<aside class="sidebar">
+			<a th:href="@{/}">
+				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
+			</a>
 
-      <nav class="category">
-        <h3>カテゴリー</h3>
-        <ul class="category-list">
-          <li>
-            <a th:href="@{/}" class="category-button" th:classappend="${selectedGenre} == null ? ' active'">全て</a>
-          </li>
-          <li th:each="g : ${genres}">
-            <a th:href="@{'/category/' + ${g}}" class="category-button"
-               th:text="${g}" th:classappend="${g.equals(selectedGenre)} ? ' active'"></a>
-          </li>
-        </ul>
-      </nav>
-    </aside>
+			<nav class="category">
+				<h3>カテゴリー</h3>
+				<ul class="category-list">
+					<li>
+						<a th:href="@{/}" class="category-button"
+							th:classappend="${selectedGenre} == null ? ' active'">全て</a>
+					</li>
+					<li th:each="g : ${genres}">
+						<a th:href="@{'/category/' + ${g}}" class="category-button" th:text="${g}"
+							th:classappend="${g.equals(selectedGenre)} ? ' active'"></a>
+					</li>
+				</ul>
+			</nav>
+		</aside>
 
-    <!-- メイン -->
-    <main class="main-content">
+		<!-- メイン -->
+		<main class="main-content">
 
-      <!-- ヘッダー -->
-      <header class="header">
-        <div class="search-container">
-          <form th:action="@{/search}" method="get">
-            <input type="text" name="keywords" th:value="${keywords}" placeholder="お酒の名前や種類を検索"
-              class="search-bar" />
-            <input type="submit" class="search-button" value="検索" />
-          </form>
-        </div>
+		<!-- ヘッダー -->
+		<header class="header">
+			<div class="search-container">
+				<form th:action="@{/search}" method="get">
+					<input type="text" name="keywords" th:value="${keywords}" placeholder="お酒の名前や種類を検索" class="search-bar" />
+					<input type="submit" class="search-button" value="検索" />
+				</form>
+			</div>
 
-        <div class="auth-buttons">
-          <!-- ログインしていなければ表示 -->
-          <div th:if="${!isLoggedIn}">
-            <a th:href="@{/login}"><button class="auth-button">ログイン</button></a>
-            <a th:href="@{/signup}"><button class="auth-button">登録</button></a>
-          </div>
+			<div class="cart-button-area">
+				<a th:if="${isLoggedIn}" th:href="@{/cart}">
+					<button class="cart-button">
+						<img th:src="@{/images/カート/CartImage.png}" alt="カート" style="width: 35px; height: auto; display: block;">
+						<span class="cart-text">カート</span>
+					</button>
+				</a>
+				<a th:if="${!isLoggedIn}" th:href="@{/login}">
+					<button class="cart-button">
+						<img th:src="@{/images/カート/CartImage.png}" alt="カート" style="width: 35px; height: auto; display: block;">
+						<span class="cart-text">カート</span>
+					</button>
+				</a>
+			</div>
 
-          <!-- ログイン中なら表示 -->
-          <div th:if="${isLoggedIn}">
-            <span class="login-user">ログイン中：<span th:text="${you.mailaddress}">ユーザー名</span></span>
-            <a th:href="@{/logout}"><button class="auth-button">ログアウト</button></a>
-          </div>
-        </div>
-      </header>
+			<div class="auth-buttons">
+				<!-- ログインしていなければ表示 -->
+				<div th:if="${!isLoggedIn}">
+					<a th:href="@{/login}"><button class="auth-button">ログイン</button></a>
+					<a th:href="@{/signup}"><button class="auth-button">登録</button></a>
+				</div>
 
-      <!-- 商品一覧 -->
-	<section class="product-list">
-		<!--        <p th:text="${message}"></p>-->
-		<div th:each="item : ${items}">
-			<!-- 在庫がある場合はリンク付き -->
-			<a th:if="${item.stock.count > 0}" class="product-link" th:href="@{/item/{id}(id=${item.itemid})}">
-				<div class="product-card">
+				<!-- ログイン中なら表示 -->
+				<div th:if="${isLoggedIn}">
+					<span class="login-user">ログイン中：<span th:text="${you.mailaddress}">ユーザー名</span></span>
+					<a th:href="@{/logout}"><button class="auth-button">ログアウト</button></a>
+				</div>
+			</div>
+		</header>
+
+		<!-- 商品一覧 -->
+		<section class="product-list">
+			<!--        <p th:text="${message}"></p>-->
+			<div th:each="item : ${items}">
+				<!-- 在庫がある場合はリンク付き -->
+				<a th:if="${item.stock.count > 0}" class="product-link" th:href="@{/item/{id}(id=${item.itemid})}">
+					<div class="product-card">
+						<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
+						<p th:text="${item.name}">商品名</p>
+						<p th:text="${item.price + '円'}">価格</p>
+					</div>
+				</a>
+
+				<!-- 在庫がない場合はリンクなし -->
+				<div th:if="${item.stock.count <= 0}" class="product-card product-card-disabled">
 					<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
 					<p th:text="${item.name}">商品名</p>
 					<p th:text="${item.price + '円'}">価格</p>
+					<p style="color: red;">在庫切れ</p>
 				</div>
-			</a>
-	
-			<!-- 在庫がない場合はリンクなし -->
-			<div th:if="${item.stock.count <= 0}" class="product-card product-card-disabled">
-				<img th:src="@{${item.picturelink}}" alt="商品画像" class="product-image" />
-				<p th:text="${item.name}">商品名</p>
-				<p th:text="${item.price + '円'}">価格</p>
-				<p style="color: red;">在庫切れ</p>
 			</div>
-		</div>
-        <p th:text="${itemListSize + '件'}"></p>
-      </section>
+					<p th:text="${itemListSize + '件'}"></p>
+		</section>
 
-    </main>
-  </div>
+		</main>
+	</div>
 </body>
-</html>
 
+</html>
