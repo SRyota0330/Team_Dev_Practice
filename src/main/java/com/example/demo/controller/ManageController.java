@@ -71,19 +71,55 @@ public class ManageController {
 	}
 	
 	
+//	@PostMapping("/editItems")
+//	public String manageTop(@RequestParam("count") int count, Item item, Model model, HttpSession session) {
+//		Long userid = (Long) session.getAttribute("userid");
+//		if(userid == 1) {
+//			itemService.editItem(item);
+//			stockService.manageCount(count, item);
+//			model.addAttribute("allItem", itemService.getAllItem());
+//			model.addAttribute("allUser", userService.getAllUser());
+//			return "admin/manageItemsAndUsers";
+//		}else {
+//			return "user/login";
+//		}
+//	}
+	
 	@PostMapping("/editItems")
-	public String manageTop(@RequestParam("count") int count, Item item, Model model, HttpSession session) {
-		Long userid = (Long) session.getAttribute("userid");
-		if(userid == 1) {
-			itemService.editItem(item);
-			stockService.manageCount(count, item);
-			model.addAttribute("allItem", itemService.getAllItem());
-			model.addAttribute("allUser", userService.getAllUser());
-			return "admin/manageItemsAndUsers";
-		}else {
-			return "user/login";
-		}
+	public String manageTop(@RequestParam("count") int count,
+	                        @RequestParam(value = "file", required = false) MultipartFile file,
+	                        Item item, Model model, HttpSession session) {
+	    Long userid = (Long) session.getAttribute("userid");
+	    if (userid == 1) {
+	        try {
+	            // 新しい画像がアップロードされた場合のみ処理
+	            if (file != null && !file.isEmpty()) {
+	                String imageUrl = s3Service.uploadFile(file);
+	                item.setPicturelink(imageUrl);
+	            } else {
+	                // 既存の画像URLを保持（DBから取得）
+	                Item existingItem = itemService.itemDetail(item.getItemid());
+	                if (existingItem != null) {
+	                    item.setPicturelink(existingItem.getPicturelink());
+	                }
+	            }
+
+	            itemService.editItem(item);
+	            stockService.manageCount(count, item);
+
+	            model.addAttribute("allItem", itemService.getAllItem());
+	            model.addAttribute("allUser", userService.getAllUser());
+	            return "admin/manageItemsAndUsers";
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            model.addAttribute("error", "商品編集に失敗しました: " + e.getMessage());
+	            return "admin/manageItemsAndUsers";
+	        }
+	    } else {
+	        return "user/login";
+	    }
 	}
+
 
 	//	Itemテーブルのみ挿入
 	@PostMapping("/addItems")

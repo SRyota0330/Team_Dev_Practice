@@ -1,6 +1,6 @@
 /* 全体背景とフォント設定 */
 body, html {
-  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  font-family: 'Noto Serif JP', "Hiragino Kaku Gothic ProN", serif;
   background: linear-gradient(#d5c8b3, #f2e2cc);
   margin: 0;
   padding: 0;
