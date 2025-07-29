@@ -15,7 +15,7 @@
 			</a>
 		</aside>
 		<h2>商品詳細ページ</h2>
-			<img th:src="${item.picturelink}" alt="商品画像">
+			<img th:src="${item.picturelink}" alt="商品画像" class="product-image">
 			<h3 th:text="${item.name}">商品名</h3>
 			<p th:text="${item.price}+'円'">価格</p>
 			<p th:text="${item.detail}">説明文</p>

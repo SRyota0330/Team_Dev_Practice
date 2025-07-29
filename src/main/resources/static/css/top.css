@@ -213,10 +213,17 @@ body, html {
 }
 
 .product-image {
-  width: 100px;
-  height: auto;
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
   margin-bottom: 10px;
 }
+
+/*.product-image {*/
+/*  width: 100px;*/
+/*  height: auto;*/
+/*  margin-bottom: 10px;*/
+/*}*/
 
 /* 件数表示 */
 .item-count {
