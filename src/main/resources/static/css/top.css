@@ -258,3 +258,9 @@ body, html {
 	text-align: center;
 }
 
+.product-card p {
+  margin: 4px 0; /* 上下の間隔を狭く */
+  font-size: 15px; /* 必要ならフォントも調整 */
+  line-height: 1.2;
+}
+
