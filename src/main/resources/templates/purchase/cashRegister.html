@@ -14,16 +14,19 @@
 				<img th:src="@{/images/ロゴ.jpg}" alt="ロゴ" class="logo" />
 			</a>
 		</aside>
+		
 		<h2>最終確認</h2>
 		<div class="card">
 			<p th:text="'合計：' + ${total} + '円'"></p>
 			<p th:text="'配送先：' + ${address}"></p>
 		</div>
-		
-		<div th:each="item : ${itemList}">
-			<p th:text="${item.name}"></p>
-			<p th:text="${item.price}"></p>
+	
+		<h3>内訳</h3>
+		<div th:each="orderItem : ${orderItems}">
+			<p><strong th:text="${orderItem.item.name}">商品名</strong></p>
+?			<p th:text="${orderItem.item.name} + '×' + ${orderItem.item.quantity} '=' ${orderItem.item.price * orderItem.item.quantity} + '円'">価格</p>
 		</div>
+		
 		<form th:action="@{confirm}" method="post">	
 			<button type="submit" class="button">購入を確定する</button>
 		</form>	
