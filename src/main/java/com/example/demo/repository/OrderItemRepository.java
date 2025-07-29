@@ -130,8 +130,15 @@ public class OrderItemRepository {
 		jdbcTemplate.update(query, orderId);
 	}
 	
+	public int getQuantity(Long orderId, Long itemId) {
+		String query = "SELECT quantity FROM orderitem WHERE order_id = ? AND item_id = ? AND status = 'cart'";
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query,orderId,itemId);
+		Map<String, Object> resultMap = resultList.get(0);
+		return (int)resultMap.get("quantity");
+	}
+	
 	public void changeQuantity(Long orderid, Long itemid, int delta) {
-		String query = "UPDATE orderitem SET quantity = quantity + ? WHERE order_id = ? AND item_id = ?";
+		String query = "UPDATE orderitem SET quantity = quantity + ? WHERE order_id = ? AND item_id = ? AND status = 'cart'";
 		jdbcTemplate.update(query, delta, orderid, itemid);
 	}
 	

@@ -27,13 +27,13 @@
 			</div>
 			
 			<div class="product-action">
-<!--				増加ボタン-->
+<!--				減少ボタン-->
 				<form th:action="@{/cart/decrease}" method="post">
 					<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
 					<button type="submit">-</button>
 				</form>
 				
-<!--				減少ボタン-->
+<!--				増加ボタン-->
 				<form th:action="@{/cart/increase}" method="post">
 					<input type="hidden" name="itemid" th:value="${orderItem.item.itemid}" />
 					<button type="submit">+</button>
@@ -52,6 +52,7 @@
 			<button class="button">レジに進む</button>
 		</a>
 		<p th:text="${emptyCart}"></p>
+		<p th:text="${param.message}"></p>
 	</div>
 </body>
 

@@ -247,3 +247,7 @@ body, html {
   cursor: default;
 }
 
+#itemListSize {
+	text-align: center;
+}
+

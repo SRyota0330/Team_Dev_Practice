@@ -211,7 +211,7 @@ public class TopController {
                 List<Item> allItemList = itemService.getAllItem();
                 allItemList = itemService.checkStock(allItemList);
                 model.addAttribute("items", allItemList);
-                model.addAttribute("itemListSize", "全件表示中");
+                model.addAttribute("itemListSize", allItemList.size());
             } else {
                 itemList = itemService.checkStock(itemList);
                 model.addAttribute("message", keywords + "の検索結果です");
