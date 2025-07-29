@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.Item;
 import com.example.demo.entity.Order;
@@ -78,11 +79,17 @@ public class CartController {
 	}
 	
 	@PostMapping("/cart/decrease")
-	public String decreaseItem(@RequestParam Long itemid, HttpSession session) {
+	public String decreaseItem(@RequestParam Long itemid, HttpSession session, RedirectAttributes redirectAttributes) {
 		Long userid = (Long) session.getAttribute("userid");
 		Order order = userService.userDetail(userid).getOrder();
-		cartService.changeQuantity(order, itemid, -1);
-		return "redirect:/cart";
+		int cartQuantity = cartService.getQuantity(order, itemid);
+		if(cartQuantity<=1) {
+			redirectAttributes.addAttribute("message", "最小注文数は１です");
+			return "redirect:/cart";
+		}else {
+			cartService.changeQuantity(order, itemid, -1);
+			return "redirect:/cart";
+		}
 	}
 	
 	@PostMapping("/cart/delete")

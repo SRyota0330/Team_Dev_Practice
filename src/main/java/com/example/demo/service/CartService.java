@@ -92,6 +92,10 @@ public class CartService {
 		orderItemRepository.clearCart(orderid);
 	}
 	
+	public int getQuantity(Order order, Long itemId) {
+		return orderItemRepository.getQuantity(order.getOrderid(), itemId);
+	}
+	
 //	public boolean checkStockAndOrder(User user) {
 //		
 //		List<OrderItem> orderItems = cartService.getAllItems(orderService.getOrderFromUser(user.getUserid()).getOrderid());
