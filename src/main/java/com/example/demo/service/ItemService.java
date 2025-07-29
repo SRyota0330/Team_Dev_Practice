@@ -55,7 +55,7 @@ public class ItemService {
 			
 			Stock stock = checkedItem.getStock();
 			
-			if(stock.getCount() == 0) {
+			if(stock.getCount() <= 0) {
 				String soldItemName = checkedItem.getName();
 				soldItemName = "[品切れ中]" + soldItemName;
 				checkedItem.setName(soldItemName);

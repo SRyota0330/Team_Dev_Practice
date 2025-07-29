@@ -147,9 +147,9 @@ public class OrderItemRepository {
 		jdbcTemplate.update(query, orderid);
 	}
 	
-	public int statusCartItems(Long orderId) {
-		String query = "SELECT * FROM orderitem WHERE order_id = ? AND status = 'cart'";
-		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query,orderId);
+	public int statusCartItems(Long orderId, Long itemId) {
+		String query = "SELECT * FROM orderitem WHERE order_id = ? AND item_id = ? AND status = 'cart'";
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList(query,orderId,itemId);
 		Map<String, Object> resultMap = resultList.get(0);
 		int cartAmount = (int)resultMap.get("quantity");
 		return cartAmount;
