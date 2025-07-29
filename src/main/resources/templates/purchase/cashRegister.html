@@ -23,8 +23,7 @@
 	
 		<h3>内訳</h3>
 		<div th:each="orderItem : ${orderItems}">
-			<p><strong th:text="${orderItem.item.name}">商品名</strong></p>
-?			<p th:text="${orderItem.item.name} + '×' + ${orderItem.item.quantity} '=' ${orderItem.item.price * orderItem.item.quantity} + '円'">価格</p>
+			<p th:text="|${orderItem.item.name} × ${orderItem.quantity} = ${orderItem.item.price * orderItem.quantity}円|">価格</p>
 		</div>
 		
 		<form th:action="@{confirm}" method="post">	
