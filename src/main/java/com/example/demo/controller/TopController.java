@@ -166,7 +166,7 @@ public class TopController {
         setLoginStatus(session, model);
 
         List<Item> allItemList = itemService.getAllItem();
-        itemService.checkStock(allItemList);
+//        itemService.checkStock(allItemList);
         model.addAttribute("message", "全ての商品");
         model.addAttribute("items", allItemList);
         model.addAttribute("itemListSize", allItemList.size());
@@ -181,7 +181,7 @@ public class TopController {
         setLoginStatus(session, model);
 
         List<Item> itemList = itemService.searchItemFromGenre(genre);
-        itemList = itemService.checkStock(itemList);
+//        itemList = itemService.checkStock(itemList);
 
         model.addAttribute("message", genre + "ジャンルの商品を表示中");
         model.addAttribute("items", itemList);
@@ -200,7 +200,7 @@ public class TopController {
         if (keywords == null || keywords.isBlank()) {
             model.addAttribute("message", "全ての商品");
             List<Item> allItemList = itemService.getAllItem();
-            allItemList = itemService.checkStock(allItemList);
+//            allItemList = itemService.checkStock(allItemList);
             model.addAttribute("items", allItemList);
             model.addAttribute("itemListSize", allItemList.size());
             model.addAttribute("keywords", "");
@@ -209,11 +209,11 @@ public class TopController {
             if (itemList.isEmpty()) {
                 model.addAttribute("message", "検索結果はありません");
                 List<Item> allItemList = itemService.getAllItem();
-                allItemList = itemService.checkStock(allItemList);
+//                allItemList = itemService.checkStock(allItemList);
                 model.addAttribute("items", allItemList);
                 model.addAttribute("itemListSize", allItemList.size());
             } else {
-                itemList = itemService.checkStock(itemList);
+//                itemList = itemService.checkStock(itemList);
                 model.addAttribute("message", keywords + "の検索結果です");
                 model.addAttribute("items", itemList);
                 model.addAttribute("itemListSize", itemList.size());

@@ -85,9 +85,15 @@ public class PurchaseController {
 		boolean result = true;
 		List<Item> lessItemList = new ArrayList<>();
 		
+		int stockAmount = 0;
+		int orderAmount = 0;
+		
 		for(OrderItem oi : orderItems) {
-			int stockAmount = stockService.getCount(oi.getItem().getItemid());
-			int orderAmount = orderItemRepository.statusCartItems(oi.getOrder().getOrderid());
+			stockAmount = stockService.getCount(oi.getItem().getItemid());
+			orderAmount = orderItemRepository.statusCartItems(oi.getOrder().getOrderid(), oi.getItem().getItemid());
+			
+			System.out.println(stockAmount +"と"+ orderAmount);
+			
 			System.out.println(stockAmount + "在庫" + orderAmount + "注文数");
 			if(stockAmount-orderAmount<0) {
 				result = false;
@@ -97,6 +103,7 @@ public class PurchaseController {
 		}
 		
 		System.out.println("在庫たるか"+result);
+		System.out.println(lessItemList);
 		
 		
 		if(result==true) {
