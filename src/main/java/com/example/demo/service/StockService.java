@@ -22,5 +22,7 @@ public class StockService {
 	public int getCount(Long itemid) {
 		return stockRepository.getCount(itemid);
 	}
+	
+	
 
 }

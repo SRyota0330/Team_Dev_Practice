@@ -189,5 +189,4 @@ public class ManageController {
 	    session.invalidate(); // セッションを破棄
 	    return "redirect:/login"; // ← このURLがログインページのURLに合ってるか確認！
 	}
-
 }

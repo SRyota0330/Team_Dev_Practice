@@ -34,7 +34,8 @@ public class CartController {
 	public String cart(Model model, HttpSession session) {
 		Long userid = (Long) session.getAttribute("userid");
 		Order order = userService.userDetail(userid).getOrder();
-		List<OrderItem> orderItems = cartService.getAllItems(order.getOrderid());
+		List<OrderItem> allOrderItems = cartService.getAllItems(order.getOrderid());
+		List<OrderItem> orderItems = cartService.getCartItemFromOrderItem(allOrderItems); 
 		model.addAttribute("itemList", orderItems);
 //		if(userid != null) {
 //			Order loggedUserOrder = orderService.getOrderFromUser(userid);
