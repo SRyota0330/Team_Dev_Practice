@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>商品追加</title>
   <link rel="stylesheet" href="/css/addItems.css" />
+  <script src="javaScript/admin.js"></script>
 </head>
 <body>
 
@@ -14,36 +15,40 @@
     </form>
   </div>
 
-  <div class="main-wrapper">
-    <h2>商品追加</h2>
+<div class="main-wrapper">
+	<h2>商品追加</h2>
 
-    <form action="/addItems" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="itemid" />
+	<brform action="/addItems" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="itemid" />
 
-      <label for="name">商品名:</label>
-      <input type="text" id="name" name="name" required />
+		<label for="name">商品名:</label>
+		<input type="text" id="name" name="name" required />
 
-      <label for="price">商品価格:</label>
-      <input type="number" id="price" name="price" required />
+		<label for="price">商品価格:</label>
+		<input type="number" id="price" name="price" required />
 
-      <label for="genre">ジャンル:</label>
-      <select id="genre" name="genre" required>
-        <option value="ワイン">ワイン</option>
-        <option value="ビール">ビール</option>
-        <option value="ウイスキー">ウイスキー</option>
-        <option value="果実酒">果実酒</option>
-        <option value="日本酒">日本酒</option>
-      </select>
+		<label for="genre">ジャンル:</label>
+		<select id="genre" name="genre" required>
+			<option value="ワイン">ワイン</option>
+			<option value="ビール">ビール</option>
+			<option value="ウイスキー">ウイスキー</option>
+			<option value="果実酒">果実酒</option>
+			<option value="日本酒">日本酒</option>
+		</select>
 
-      <label for="detail">商品詳細:</label>
-      <textarea id="detail" name="detail" rows="4"></textarea>
+		<label for="detail">商品詳細:</label>
+		<textarea id="detail" name="detail" rows="4"></textarea>
 
-      <label for="file">商品画像:</label>
-      <input type="file" id="file" name="file" accept="image/*" />
+		<label for="file">商品画像:</label>
+		<input type="file" id="file" name="file" accept="image/*" onchange="previewImage(event)" />
 
-      <button type="submit" class="button">商品追加</button>
-    </form>
-  </div>
+		<br>
+		<img id="preview" src="#" alt="画像プレビュー" style="max-width:300px; display:none;">
+		</br>
+
+		<button type="submit" class="button">商品追加</button>
+		</form>
+</div>
 
 </body>
 </html>

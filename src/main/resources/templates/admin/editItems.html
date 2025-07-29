@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>商品編集</title>
   <link rel="stylesheet" href="/css/editItems.css">
+
 </head>
 
 <body>
@@ -27,8 +28,14 @@
       <label for="price">商品価格:</label>
       <input type="text" id="price" name="price" th:value="${item.price}">
 
-      <label for="genre">ジャンル:</label>
-      <input type="text" id="genre" name="genre" th:value="${item.genre}">
+	  <label for="genre">ジャンル:</label>
+	  <select id="genre" name="genre" required>
+	    <option value="ワイン">ワイン</option>
+	    <option value="ビール">ビール</option>
+	    <option value="ウイスキー">ウイスキー</option>
+	    <option value="果実酒">果実酒</option>
+	    <option value="日本酒">日本酒</option>
+	  </select>
 
       <label for="detail">商品詳細:</label>
       <textarea id="detail" name="detail" th:text="${item.detail}"></textarea>
@@ -41,14 +48,27 @@
 
       <!-- 画像ファイルアップロード -->
       <label for="file">新しい商品画像:</label>
-      <input type="file" id="file" name="file" accept="image/*">
-
+      <input type="file" id="file" name="file" accept="image/*" onchange="previewImage(event)">
+	  <img id="preview" alt="新しい画像プレビュー" style="max-width: 200px; max-height: 200px; display: none;">
+	  
       <label for="count">商品数量:</label>
       <input type="number" id="count" name="count" th:value="${count}">
-
+    
       <button type="submit" class="button">更新</button>
     </form>
   </div>
+  <script>
+  function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+          const preview = document.getElementById('preview');
+          preview.src = reader.result;
+          preview.style.display = 'block';
+      };
+      reader.readAsDataURL(event.target.files[0]);
+  }
+  </script>
+
 </body>
 
 </html>

@@ -23,7 +23,7 @@
 		</div>
 	
 		<h3>内訳</h3>
-		<div th:each="orderItem : ${orderItems}">
+		<div th:each="orderItem : ${orderItemList}">
 			<p th:text="|${orderItem.item.name} × ${orderItem.quantity} = ${orderItem.item.price * orderItem.quantity}円|">価格</p>
 
 		</div>
